@@ -9,63 +9,63 @@ function throwError() {
     document.body()
   )
 }
-
-function Home() {
-  const [count, setCount] = useState(0)
-  const increment = useCallback(() => {
-    setCount((v) => v + 1)
-  }, [setCount])
-
-  useEffect(() => {
-    const r = setInterval(() => {
-      increment()
-    }, 1000)
-
-    return () => {
-      clearInterval(r)
-    }
-  }, [increment])
-
+export default function Home() {
   return (
-    <main className={styles.main}>
-      <h1>Fast Refresh Demo</h1>
-      <p>
-        Fast Refresh is a Next.js feature that gives you instantaneous feedback
-        on edits made to your React components, without ever losing component
-        state.
-      </p>
-      <hr className={styles.hr} />
-      <div>
-        <p>
-          Auto incrementing value. The counter won't reset after edits or if
-          there are errors.
-        </p>
-        <p>Current value: {count}</p>
-      </div>
-      <hr className={styles.hr} />
-      <div>
-        <p>Component with state.</p>
-        <ClickCount />
-      </div>
-      <hr className={styles.hr} />
-      <div>
-        <p>
-          The button below will throw 2 errors. You'll see the error overlay to
-          let you know about the errors but it won't break the page or reset
-          your state.
-        </p>
-        <Button
-          onClick={(e) => {
-            setTimeout(() => document.parentNode(), 0)
-            throwError()
-          }}
-        >
-          Throw an Error
-        </Button>
-      </div>
-      <hr className={styles.hr} />
-    </main>
-  )
-}
+    <div className="min-h-screen bg-gray-100 text-gray-900">
+      {/* Hero Section */}
+      <section className="flex flex-col justify-center items-center text-center py-32">
+        <h1 className="text-5xl font-bold text-blue-600">Hi, I'm Abhijeet</h1>
+        <p className="text-xl mt-4">I'm a web developer. Welcome to my portfolio!</p>
+        <a href="https://github.com/Acinnamon9" className="mt-6 text-lg text-blue-500 hover:underline">
+          Check out my GitHub
+        </a>
+      </section>
 
-export default Home
+
+
+      {/* About Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-semibold">About Me</h2>
+          <p className="mt-4 text-lg text-gray-700">
+            I’m passionate about coding and currently diving deep into full-stack development with React, Node.js, and more!
+          </p>
+        </div>
+      </section>
+
+      <section className="py-20 bg-gray-200 text-gray-900">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-semibold">My Projects</h2>
+          <p className="mt-4 text-lg text-gray-700">
+            Check out my upcoming projects! I'll be adding them soon.
+          </p>
+        </div>
+      </section>
+
+      <section className="py-20 bg-gray-100">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-semibold">My Skills</h2>
+          <ul className="mt-4 text-lg text-gray-700">
+            <li>JavaScript (ES6+)</li>
+            <li>React</li>
+            <li>Node.js</li>
+            <li>MongoDB</li>
+            <li>CSS (Tailwind, CSS Grid, Flexbox)</li>
+            <li>Git & GitHub</li>
+          </ul>
+        </div>
+      </section>
+
+
+      {/* Contact Section */}
+      <section className="py-20 bg-gray-200">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-semibold">Contact Me</h2>
+          <p className="mt-4 text-lg text-gray-700">
+            Feel free to reach out! You can email me at <a href="mailto:youremail@example.com" className="text-blue-500">abhisand30@gmail.com</a>
+          </p>
+        </div>
+      </section>
+    </div>
+  );
+}
