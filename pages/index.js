@@ -4,6 +4,7 @@ import ClickCount from '../components/ClickCount'
 import styles from '../styles/home.module.css'
 import ProjectsSection from './ProjectsSection'
 import SkillsSection from './SkillsSection'
+import HeroSection from './HeroSection'
 
 function throwError() {
   console.log(
@@ -23,15 +24,10 @@ export default function Home() {
           <li><a href="#contact" className="hover:text-blue-600">Contact</a></li>
         </ul>
       </nav>
-      <div className="min-h-screen bg-gray-100 text-gray-900">
-        {/* Hero Section */}
-        <section className="flex flex-col justify-center items-center text-center py-32">
-          <h1 className="text-5xl font-bold text-blue-600">Hi, I'm Abhijeet</h1>
-          <p className="text-xl mt-4">I'm a web developer. Welcome to my portfolio!</p>
-          <a href="https://github.com/Acinnamon9" className="mt-6 text-lg text-blue-500 hover:underline">
-            Check out my GitHub
-          </a>
-        </section>
+
+      
+        <HeroSection />
+        
 
 
 
@@ -59,6 +55,5 @@ export default function Home() {
           </div>
         </section>
       </div>
-    </div>
   );
 }
