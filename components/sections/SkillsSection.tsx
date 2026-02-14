@@ -8,7 +8,7 @@ export default function SkillsSection() {
   return (
     <section
       id="skills"
-      className="py-24 relative overflow-hidden bg-foreground text-background border-y-[12px] border-foreground"
+      className="py-24 relative overflow-hidden bg-foreground text-background border-y-12 border-foreground"
     >
       <div className="max-w-7xl mx-auto px-6 mb-24 flex flex-col items-center text-center">
         <h2 className="text-5xl md:text-7xl lg:text-9xl font-black mb-8 italic tracking-tighter text-brand-primary leading-none">

@@ -36,7 +36,7 @@ const HERO_CAROUSELS = [
 export default function HeroSection() {
   return (
     <section
-      className="relative min-h-screen flex items-center justify-center px-8 md:px-16 lg:px-24 pb-16 md:pb-20 overflow-hidden bg-[#ffeb3b]/10 border-b-8 border-foreground"
+      className="relative min-h-screen flex items-center justify-center px-8 md:px-16 lg:px-24 pb-16 md:pb-20 overflow-hidden bg-brand-primary/10 border-b-8 border-foreground"
       style={{ paddingTop: "calc(var(--navbar-h, 5rem) + 1rem)" }}
     >
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center w-full">

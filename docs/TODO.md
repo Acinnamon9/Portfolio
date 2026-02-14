@@ -27,7 +27,7 @@
 ## 📁 Key Files Reference
 
 | What | Where |
-|------|-------|
+| :--- | :--- |
 | All project/skill/bio data | `lib/constants.tsx` |
 | OG tags & metadata | `app/layout.tsx` |
 | Navbar (resume/LinkedIn) | `components/Navbar.tsx` |

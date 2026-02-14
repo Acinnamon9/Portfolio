@@ -3,25 +3,28 @@
 This document contains all the copy and text displayed on the portfolio website, organized by section.
 
 ## 1. Navigation
+
 - ABOUT
 - PROJECTS
 - SKILLS
 - CONTACT
 
 ## 2. Hero Section
+
 - **Badge**: Frontend Developer
-- **Main Heading**: 
+- **Main Heading**:
   - Phrases: BUILDING [INTERFACES / EXPERIENCES / LANDING PAGES / PRODUCTS / PLATFORMS]
   - Targets: FOR [STARTUPS / FOUNDERS / REAL USERS / THE FUTURE / GROWTH]
-- **Tagline**: 
+- **Tagline**:
   - RESPONSIVE, INTERACTIVE UIs.
   - FULL-STACK FOUNDATIONS.
   - CLEAN, USER-FIRST CODE.
-- **CTA Buttons**: 
+- **CTA Buttons**:
   - VIEW WORK
   - CONNECT
 
 ## 3. About Section
+
 - **Badge**: ABOUT ME // THE MISSIONS
 - **Main Headline**: TURNING COMPLEX IDEAS INTO SMOOTH, RELIABLE APPS.
 - **Personal Bio**:
@@ -39,17 +42,19 @@ This document contains all the copy and text displayed on the portfolio website,
   - 100% PRODUCT COMPLETION.
 
 ## 4. Projects Section
+
 - **Badge**: Selected Output
 - **Section Title**: THE PORTFOLIO.
 - **Projects**:
   - **LEXICAL MAXXING**: LOCAL-FIRST VOCAB MASTERY APP WITH CUSTOM TERMINAL INTERFACE, DUAL AI AGENTS, OFFLINE STORAGE (DEXIE.JS), AND SPACED REPETITION FOR POWER USERS.
-    - Live: https://lexical-maxxing.vercel.app
-    - Repo: https://github.com/Acinnamon9/lexical-maxxing
+    - Live: <https://lexical-maxxing.vercel.app>
+    - Repo: <https://github.com/Acinnamon9/lexical-maxxing>
   - **EMPIRE // REVENUE ENGINE**: INTERACTIVE REVENUE MODELING PLATFORM FOR FOUNDERS. DYNAMIC STACK BUILDER WITH REAL-TIME CALCULATIONS, 70+ REUSABLE COMPONENTS, AND FRAMER MOTION TRANSITIONS.
   - **COFFEEMIUM // STORE**: END-TO-END E-COMMERCE PLATFORM WITH RESPONSIVE PRODUCT GRIDS, CLIENT-SIDE FILTERING, PERSISTENT CART STATE, AND PRISMA/POSTGRESQL BACKEND.
-    - Repo: https://github.com/Acinnamon9/Coffeemium
+    - Repo: <https://github.com/Acinnamon9/Coffeemium>
 
 ## 5. Skills Section
+
 - **Section Title**: THE ENGINE // ROOM
 - **Description**: MOBILE-FIRST DESIGN, CLEAN ARCHITECTURE, AND CORE WEB VITALS OPTIMIZATION — FROM CONCEPTION TO DEPLOYMENT.
 - **Core Technologies**:
@@ -58,8 +63,9 @@ This document contains all the copy and text displayed on the portfolio website,
   - AI & Tools: OpenAI, Gemini, Dexie.js, Vercel, Git
 
 ## 6. Contact Section
+
 - **Main Headline**: LET'S BUILD SOMETHING REAL.
 - **Call to Action**: SEEKING FRONTEND OR FULL-STACK OPPORTUNITIES (REACT/TS/NEXT.JS) WITH REAL IMPACT, FAIR COMPENSATION, AND ROOM TO GROW.
 - **Contact Info**:
-  - Email: abhisand30@gmail.com
-  - Github: https://github.com/Acinnamon9
+  - Email: <abhisand30@gmail.com>
+  - Github: <https://github.com/Acinnamon9>

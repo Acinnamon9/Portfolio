@@ -79,7 +79,7 @@ export default function ProjectsSection() {
                     <div className="absolute inset-0 bg-foreground/20 group-hover:bg-transparent transition-colors pointer-events-none"></div>
                   </div>
 
-                  <div className="p-6 md:p-8 space-y-4 md:space-y-6 flex-grow">
+                  <div className="p-6 md:p-8 space-y-4 md:space-y-6 grow">
                     <div className="flex flex-wrap gap-3">
                       {project.tags.map((tag) => (
                         <span
