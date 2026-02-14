@@ -40,7 +40,7 @@ export function InfiniteMarquee({
   return (
     <div
       className={cn(
-        "overflow-hidden select-none",
+        "select-none",
         isVertical ? "flex flex-col h-full" : "flex w-full",
         pauseOnHover && "pause-on-hover",
         className,

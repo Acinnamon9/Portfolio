@@ -15,8 +15,8 @@ export default function SkillsSection() {
           THE ENGINE // <br /> ROOM
         </h2>
         <p className="text-lg md:text-2xl font-black max-w-3xl uppercase leading-none text-background/80 outline-text">
-          I'VE MASTERED A DIVERSE RANGE OF TECHNOLOGIES TO BUILD ROBUST
-          APPLICATIONS FROM CONCEPTION TO DEPLOYMENT.
+          MOBILE-FIRST DESIGN, CLEAN ARCHITECTURE, AND CORE WEB VITALS
+          OPTIMIZATION — FROM CONCEPTION TO DEPLOYMENT.
         </p>
       </div>
 
