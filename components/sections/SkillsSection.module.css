@@ -1,0 +1,6 @@
+.skillsTrackContainer {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  padding: 1rem 0;
+}
