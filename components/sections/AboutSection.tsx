@@ -24,7 +24,7 @@ import {
 
 export default function AboutSection() {
   return (
-    <section id="about" className="px-6">
+    <section id="about" className="relative px-6 z-40 bg-background ">
       <div className="max-w-7xl mx-auto space-y-20">
         {/* Social Proof Counter */}
         <motion.div
@@ -238,7 +238,6 @@ export default function AboutSection() {
                 {[
                   "LEAVE IT BETTER THAN I FOUND IT.",
                   "BUILT FOR MAINTAINABILITY.",
-                  "NO VIBECODING. LOGIC ONLY.",
                   "100% PRODUCT COMPLETION.",
                 ].map((point, i) => (
                   <li key={i} className="flex gap-4 items-center">

@@ -37,7 +37,7 @@ export function SkillCard({
       whileHover={animateOnHover ? { y: -5, x: -3 } : {}}
       data-tooltip={name}
       className={cn(
-        "flex items-center justify-center border-4 border-foreground shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] group transition-all brutalist-tooltip shrink-0",
+        "flex items-center justify-center border-4 border-foreground shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] group transition-all brutalist-tooltip shrink-0 z-10 ",
         sizeClasses[size],
         color,
         animateOnHover && "hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)]",
