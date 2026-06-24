@@ -3,21 +3,21 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://abhijeet.dev"),
-  title: "Abhijeet | Frontend Developer",
+  title: "Abhijeet Singh | Product-Focused Software Engineer",
   description:
-    "Frontend Developer with full-stack foundations. Building responsive, interactive web experiences with React, TypeScript, and clean, user-first code.",
+    "Product-focused software engineer working across frontend systems, backend services, data models, permissions, and AI integrations.",
   openGraph: {
-    title: "Abhijeet | Frontend Developer",
+    title: "Abhijeet Singh | Product-Focused Software Engineer",
     description:
-      "Frontend Developer with full-stack foundations. Building responsive, interactive web experiences with React, TypeScript, and clean, user-first code.",
+      "Building operational software across product flows, frontend interfaces, backend systems, and AI integrations.",
     url: "https://abhijeet.dev",
-    siteName: "Abhijeet — Portfolio",
+    siteName: "Abhijeet Singh — Portfolio",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Abhijeet — Frontend Developer Portfolio",
+        alt: "Abhijeet Singh — Product-Focused Software Engineer",
       },
     ],
     locale: "en_US",
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Abhijeet | Frontend Developer",
+    title: "Abhijeet Singh | Product-Focused Software Engineer",
     description:
-      "Frontend Developer with full-stack foundations. React, TypeScript, and clean, user-first code.",
+      "Building operational software across product flows, frontend interfaces, backend systems, and AI integrations.",
     images: ["/og-image.png"],
   },
   icons: {

@@ -1,64 +1,101 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect, useMemo } from "react";
-import { HERO_DYNAMIC_WORDS, HERO_DYNAMIC_TARGETS } from "../../lib/constants";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type MouseEvent,
+} from "react";
+import {
+  HERO_DYNAMIC_WORDS,
+  HERO_DYNAMIC_TARGETS,
+} from "../../lib/constants";
 
 export function HeroTitle() {
   const [serviceIndex, setServiceIndex] = useState(0);
   const [targetIndex, setTargetIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLHeadingElement>(null);
 
-  // Find the longest words to reserve space naturally
   const longestService = useMemo(
-    () => [...HERO_DYNAMIC_WORDS].sort((a, b) => b.length - a.length)[0],
+    () =>
+      [...HERO_DYNAMIC_WORDS].sort(
+        (a, b) => b.length - a.length,
+      )[0],
     [],
   );
+
   const longestTarget = useMemo(
-    () => [...HERO_DYNAMIC_TARGETS].sort((a, b) => b.length - a.length)[0],
+    () =>
+      [...HERO_DYNAMIC_TARGETS].sort(
+        (a, b) => b.length - a.length,
+      )[0],
     [],
   );
 
   useEffect(() => {
-    const sInt = setInterval(
-      () => setServiceIndex((i) => (i + 1) % HERO_DYNAMIC_WORDS.length),
-      10000,
-    );
-    const tInt = setInterval(
-      () => setTargetIndex((i) => (i + 1) % HERO_DYNAMIC_TARGETS.length),
-      8000,
-    );
+    const serviceInterval = setInterval(() => {
+      setServiceIndex(
+        (index) => (index + 1) % HERO_DYNAMIC_WORDS.length,
+      );
+    }, 10000);
+
+    const targetInterval = setInterval(() => {
+      setTargetIndex(
+        (index) => (index + 1) % HERO_DYNAMIC_TARGETS.length,
+      );
+    }, 8000);
+
     return () => {
-      clearInterval(sInt);
-      clearInterval(tInt);
+      clearInterval(serviceInterval);
+      clearInterval(targetInterval);
     };
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleMouseMove = (
+    event: MouseEvent<HTMLHeadingElement>,
+  ) => {
     if (!containerRef.current) return;
+
     const { left, top, width, height } =
       containerRef.current.getBoundingClientRect();
-    const x = ((e.clientX - left) / width) * 100;
-    const y = ((e.clientY - top) / height) * 100;
-    containerRef.current.style.setProperty("--mouse-x", `${x}%`);
-    containerRef.current.style.setProperty("--mouse-y", `${y}%`);
-  };
 
-  // Never increase text size more than 6xl
+    const x = ((event.clientX - left) / width) * 100;
+    const y = ((event.clientY - top) / height) * 100;
+
+    containerRef.current.style.setProperty(
+      "--mouse-x",
+      `${x}%`,
+    );
+    containerRef.current.style.setProperty(
+      "--mouse-y",
+      `${y}%`,
+    );
+  };
 
   return (
     <h1
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="text-4xl md:text-6xl font-black tracking-tighter leading-[0.85] mb-6 text-foreground text-center lg:text-left [--mouse-x:50%] [--mouse-y:50%]"
+      className="
+        mb-5 max-w-full
+        text-center font-black tracking-tighter text-foreground
+        text-[clamp(2.15rem,11vw,4rem)]
+        leading-[0.9]
+        md:text-6xl
+        lg:text-left
+        [--mouse-x:50%]
+        [--mouse-y:50%]
+      "
     >
-      BUILDING <br className="hidden sm:block" />
-      {/* Service Word */}
-      <span
-        className="inline-block relative align-bottom overflow-hidden h-[1em]"
-        style={{ width: "auto" }}
-      >
-        <span className="invisible pointer-events-none select-none leading-none whitespace-nowrap">
+      <span className="block">BUILDING</span>
+
+      <span className="relative block h-[1em] max-w-full overflow-hidden">
+        <span
+          aria-hidden="true"
+          className="invisible block whitespace-nowrap leading-none"
+        >
           {longestService}
         </span>
 
@@ -68,10 +105,17 @@ export function HeroTitle() {
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "-100%" }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="gradient-text absolute inset-0 whitespace-nowrap leading-none"
+            transition={{
+              duration: 0.5,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="
+              gradient-text absolute inset-0
+              whitespace-nowrap leading-none
+            "
             style={{
-              backgroundPosition: "var(--mouse-x) var(--mouse-y)",
+              backgroundPosition:
+                "var(--mouse-x) var(--mouse-y)",
               backgroundImage:
                 "radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--secondary) 0%, var(--accent) 50%, var(--secondary) 100%)",
               backgroundSize: "200% 200%",
@@ -81,25 +125,45 @@ export function HeroTitle() {
           </motion.span>
         </AnimatePresence>
       </span>
-      <br className="hidden sm:block" />
-      FOR {/* Target Word */}
-      <span className="inline-block relative align-bottom overflow-hidden h-[1em]">
-        <span className="invisible pointer-events-none select-none leading-none whitespace-nowrap italic">
-          {longestTarget}.
-        </span>
 
-        <AnimatePresence mode="wait">
-          <motion.span
-            key={HERO_DYNAMIC_TARGETS[targetIndex]}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.2 }}
-            transition={{ duration: 0.4 }}
-            className="absolute inset-0 whitespace-nowrap leading-none italic underline decoration-4 md:decoration-8 decoration-brand-secondary"
+      <span
+        className="
+          mt-1 flex flex-wrap items-baseline
+          justify-center gap-x-[0.22em]
+          lg:justify-start
+        "
+      >
+        <span>FOR</span>
+
+        <span className="relative inline-block h-[1em] overflow-hidden">
+          <span
+            aria-hidden="true"
+            className="
+              invisible block whitespace-nowrap
+              italic leading-none
+            "
           >
-            {HERO_DYNAMIC_TARGETS[targetIndex]}.
-          </motion.span>
-        </AnimatePresence>
+            {longestTarget}.
+          </span>
+
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={HERO_DYNAMIC_TARGETS[targetIndex]}
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.15 }}
+              transition={{ duration: 0.4 }}
+              className="
+                absolute inset-0 whitespace-nowrap
+                italic leading-none underline
+                decoration-4 decoration-brand-secondary
+                md:decoration-8
+              "
+            >
+              {HERO_DYNAMIC_TARGETS[targetIndex]}.
+            </motion.span>
+          </AnimatePresence>
+        </span>
       </span>
     </h1>
   );

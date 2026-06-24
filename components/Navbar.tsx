@@ -1,239 +1,341 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useMotionValueEvent,
-} from "framer-motion";
-import { Menu, X, Moon, Sun, FileDown, Linkedin } from "lucide-react";
-import { cn } from "../lib/utils";
+  FileDown,
+  Github,
+  Linkedin,
+  Menu,
+  Moon,
+  Sun,
+  X,
+} from "lucide-react";
 import Link from "next/link";
 
+const NAVIGATION = [
+  {
+    label: "Work",
+    href: "/#work",
+  },
+  {
+    label: "Contact",
+    href: "/#contact",
+  },
+];
+
 export default function Navbar() {
-  const [isHidden, setIsHidden] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [theme, setTheme] = useState("light");
-  const [activeSection, setActiveSection] = useState<string>("");
-  const { scrollY } = useScroll();
-  const lastScrollY = useRef(0);
-
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = lastScrollY.current;
-    if (latest > previous && latest > 150) {
-      setIsHidden(true);
-    } else {
-      setIsHidden(false);
-    }
-    lastScrollY.current = latest;
-  });
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "light";
-    setTheme(savedTheme);
-    document.documentElement.setAttribute("data-theme", savedTheme);
-  }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme);
-  };
-
-  const navLinks = [
-    { name: "About", href: "/#about", sectionId: "about" },
-    { name: "Projects", href: "/#projects", sectionId: "projects" },
-    { name: "Skills", href: "/#skills", sectionId: "skills" },
-    { name: "Contact", href: "/#contact", sectionId: "contact" },
-  ];
-
-  // Track active section via IntersectionObserver
-  useEffect(() => {
-    const sectionIds = ["about", "projects", "skills", "contact"];
-    const observers: IntersectionObserver[] = [];
-
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveSection(id);
-          }
-        },
-        { rootMargin: "-40% 0px -55% 0px" },
-      );
-
-      observer.observe(el);
-      observers.push(observer);
-    });
-
-    return () => observers.forEach((o) => o.disconnect());
-  }, []);
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const navRef = useRef<HTMLElement>(null);
 
-  // Expose navbar height as a CSS variable so other sections can avoid overlap
   useEffect(() => {
-    const el = navRef.current;
-    if (!el) return;
-    const observer = new ResizeObserver(([entry]) => {
+    const storedTheme = localStorage.getItem("theme");
+    const initialTheme = storedTheme === "dark" ? "dark" : "light";
+
+    setTheme(initialTheme);
+    document.documentElement.setAttribute(
+      "data-theme",
+      initialTheme,
+    );
+  }, []);
+
+  useEffect(() => {
+    const nav = navRef.current;
+
+    if (!nav) {
+      return;
+    }
+
+    const updateNavbarHeight = () => {
       document.documentElement.style.setProperty(
         "--navbar-h",
-        `${entry.borderBoxSize[0].blockSize}px`,
+        `${nav.getBoundingClientRect().height}px`,
       );
-    });
-    observer.observe(el);
+    };
+
+    updateNavbarHeight();
+
+    const observer = new ResizeObserver(updateNavbarHeight);
+    observer.observe(nav);
+
     return () => observer.disconnect();
   }, []);
 
+  const toggleTheme = () => {
+    const nextTheme = theme === "light" ? "dark" : "light";
+
+    setTheme(nextTheme);
+    localStorage.setItem("theme", nextTheme);
+    document.documentElement.setAttribute(
+      "data-theme",
+      nextTheme,
+    );
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
-    <motion.nav
+    <nav
       ref={navRef}
-      variants={{
-        visible: { y: 0 },
-        hidden: { y: "-100%" },
-      }}
-      animate={isHidden ? "hidden" : "visible"}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="fixed top-0 w-full z-50 px-6 py-4 border-b-8 border-foreground bg-background shadow-[0px_8px_0px_0px_rgba(0,0,0,0.1)] opacity-100"
-      style={{ backgroundColor: "var(--background)" }}
+      className="
+        fixed inset-x-0 top-0 z-50
+        border-b border-foreground/10
+        bg-background/95 backdrop-blur-md
+      "
     >
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <Link href="/">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="text-4xl font-black bg-foreground text-background px-4 py-2 border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] leading-none italic cursor-pointer"
+      <div
+        className="
+          mx-auto flex h-20 max-w-7xl
+          items-center justify-between
+          px-4 sm:px-6 lg:px-12
+        "
+      >
+        <Link
+          href="/"
+          onClick={closeMenu}
+          className="
+            group flex min-w-0 items-center
+            gap-3 text-foreground
+          "
+        >
+          <span
+            className="
+              whitespace-nowrap text-lg font-semibold
+              tracking-[-0.025em]
+              transition-opacity group-hover:opacity-60
+              sm:text-xl
+            "
           >
-            ABHIJEET.
-          </motion.div>
+            Abhijeet Singh
+          </span>
+
+          <span
+            className="
+              hidden border-l border-foreground/20
+              pl-3 text-xs font-medium uppercase
+              tracking-[0.16em] text-foreground/45
+              sm:block
+            "
+          >
+            Software Engineer
+          </span>
         </Link>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-12">
-          <ul className="flex gap-10">
-            {navLinks.map((link) => (
-              <li key={link.name}>
-                <a
-                  href={link.href}
-                  className={cn(
-                    "text-xl font-black underline decoration-4 underline-offset-8 transition-all uppercase tracking-tighter",
-                    activeSection === link.sectionId
-                      ? "text-brand-secondary decoration-brand-secondary"
-                      : "decoration-transparent hover:text-brand-secondary hover:decoration-brand-secondary",
-                  )}
-                >
-                  {link.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <div className="flex items-center gap-4">
+        <div className="hidden items-center gap-7 md:flex">
+          {NAVIGATION.map((item) => (
             <a
-              href="/Abhijeet_Resume.pdf"
-              download
-              className="p-3 border-4 border-foreground bg-brand-secondary shadow-[4px_4px_0px_0px_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all"
-              title="Download Resume"
+              key={item.label}
+              href={item.href}
+              className="
+                text-sm font-medium text-foreground/65
+                transition-colors hover:text-foreground
+              "
             >
-              <FileDown size={24} strokeWidth={3} />
+              {item.label}
             </a>
-            <a
-              href="https://www.linkedin.com/in/abhijeet-sandhu"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 border-4 border-foreground bg-[#0077B5] text-white shadow-[4px_4px_0px_0px_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all"
-              title="LinkedIn"
-            >
-              <Linkedin size={24} strokeWidth={3} />
-            </a>
-            <button
-              onClick={toggleTheme}
-              className="p-3 border-4 border-foreground bg-brand-primary shadow-[4px_4px_0px_0px_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all"
-            >
-              {theme === "light" ? (
-                <Moon size={24} strokeWidth={3} />
-              ) : (
-                <Sun size={24} strokeWidth={3} />
-              )}
-            </button>
-          </div>
+          ))}
+
+          <a
+            href="/Abhijeet_Resume.pdf"
+            download
+            className="
+              inline-flex items-center gap-2
+              text-sm font-medium text-foreground/65
+              transition-colors hover:text-foreground
+            "
+          >
+            Resume
+            <FileDown
+              size={16}
+              strokeWidth={1.8}
+              aria-hidden="true"
+            />
+          </a>
+
+          <a
+            href="https://github.com/Acinnamon9"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open Abhijeet's GitHub profile"
+            className="
+              text-foreground/55
+              transition-colors hover:text-foreground
+            "
+          >
+            <Github size={19} strokeWidth={1.8} />
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/abhijeet-sandhu"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open Abhijeet's LinkedIn profile"
+            className="
+              text-foreground/55
+              transition-colors hover:text-foreground
+            "
+          >
+            <Linkedin size={19} strokeWidth={1.8} />
+          </a>
+
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={
+              theme === "light"
+                ? "Switch to dark theme"
+                : "Switch to light theme"
+            }
+            className="
+              flex h-9 w-9 items-center justify-center
+              border border-foreground/15
+              text-foreground/65
+              transition-colors
+              hover:border-foreground/40
+              hover:text-foreground
+            "
+          >
+            {theme === "light" ? (
+              <Moon size={17} strokeWidth={1.8} />
+            ) : (
+              <Sun size={17} strokeWidth={1.8} />
+            )}
+          </button>
         </div>
 
-        {/* Mobile Toggle */}
-        <div className="flex items-center gap-4 md:hidden">
+        <div className="flex items-center gap-2 md:hidden">
           <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 border-4 border-foreground"
+            type="button"
+            onClick={toggleTheme}
+            aria-label={
+              theme === "light"
+                ? "Switch to dark theme"
+                : "Switch to light theme"
+            }
+            className="
+              flex h-10 w-10 items-center justify-center
+              border border-foreground/15
+              text-foreground/70
+            "
           >
-            {isMobileMenuOpen ? (
-              <X size={28} strokeWidth={4} />
+            {theme === "light" ? (
+              <Moon size={18} strokeWidth={1.8} />
             ) : (
-              <Menu size={28} strokeWidth={4} />
+              <Sun size={18} strokeWidth={1.8} />
+            )}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen((open) => !open)}
+            aria-expanded={isMenuOpen}
+            aria-label={
+              isMenuOpen
+                ? "Close navigation menu"
+                : "Open navigation menu"
+            }
+            className="
+              flex h-10 w-10 items-center justify-center
+              border border-foreground/15
+              text-foreground
+            "
+          >
+            {isMenuOpen ? (
+              <X size={20} strokeWidth={1.8} />
+            ) : (
+              <Menu size={20} strokeWidth={1.8} />
             )}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {isMenuOpen && (
           <motion.div
-            initial={{ height: 0 }}
-            animate={{ height: "auto" }}
-            exit={{ height: 0 }}
-            className="md:hidden bg-background border-t-8 border-foreground overflow-hidden"
+            initial={{
+              opacity: 0,
+              height: 0,
+            }}
+            animate={{
+              opacity: 1,
+              height: "auto",
+            }}
+            exit={{
+              opacity: 0,
+              height: 0,
+            }}
+            transition={{
+              duration: 0.2,
+            }}
+            className="
+              overflow-hidden border-t
+              border-foreground/10 bg-background md:hidden
+            "
           >
-            <ul className="flex flex-col p-8 gap-6">
-              {navLinks.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className={cn(
-                      "text-4xl font-black block uppercase italic transition-colors",
-                      activeSection === link.sectionId
-                        ? "text-brand-secondary"
-                        : "",
-                    )}
-                  >
-                    {link.name}
-                  </a>
-                </li>
+            <div className="space-y-1 px-4 py-5 sm:px-6">
+              {NAVIGATION.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={closeMenu}
+                  className="
+                    block border-b border-foreground/10
+                    py-4 text-lg font-medium text-foreground
+                  "
+                >
+                  {item.label}
+                </a>
               ))}
-              <li className="pt-6 border-t-4 border-foreground flex flex-col gap-6">
-                <a
-                  href="/Abhijeet_Resume.pdf"
-                  download
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-2xl font-black uppercase flex items-center gap-4"
-                >
-                  <FileDown size={24} strokeWidth={3} /> DOWNLOAD RESUME
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/abhijeet-sandhu"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-2xl font-black uppercase flex items-center gap-4"
-                >
-                  <Linkedin size={24} strokeWidth={3} /> LINKEDIN
-                </a>
-                <button
-                  onClick={toggleTheme}
-                  className="text-2xl font-black uppercase flex items-center gap-4"
-                >
-                  {theme === "light" ? <Moon size={24} /> : <Sun size={24} />}
-                  TOGGLE THEME
-                </button>
-              </li>
-            </ul>
+
+              <a
+                href="/Abhijeet_Resume.pdf"
+                download
+                onClick={closeMenu}
+                className="
+                  flex items-center justify-between
+                  border-b border-foreground/10
+                  py-4 text-lg font-medium text-foreground
+                "
+              >
+                Resume
+                <FileDown size={19} strokeWidth={1.8} />
+              </a>
+
+              <a
+                href="https://github.com/Acinnamon9"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
+                className="
+                  flex items-center justify-between
+                  border-b border-foreground/10
+                  py-4 text-lg font-medium text-foreground
+                "
+              >
+                GitHub
+                <Github size={19} strokeWidth={1.8} />
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/abhijeet-sandhu"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
+                className="
+                  flex items-center justify-between
+                  py-4 text-lg font-medium text-foreground
+                "
+              >
+                LinkedIn
+                <Linkedin size={19} strokeWidth={1.8} />
+              </a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   );
 }

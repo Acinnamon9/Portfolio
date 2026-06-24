@@ -1,114 +1,250 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "../ui/Button";
-import { ArrowRight } from "lucide-react";
 import {
-  FRONTEND_SKILLS,
-  BACKEND_SKILLS,
-  AI_SKILLS,
-} from "../../lib/constants";
-import { InfiniteMarquee } from "../ui/InfiniteMarquee";
-import { SkillCard } from "../ui/SkillCard";
-import { HeroTitle } from "../ui/HeroTitle";
+  ArrowDownRight,
+  FileDown,
+  Mail,
+} from "lucide-react";
 
-const HERO_CAROUSELS = [
-  {
-    skills: FRONTEND_SKILLS,
-    direction: "up" as const,
-    speed: 22,
-    color: "bg-brand-secondary",
-  },
-  {
-    skills: BACKEND_SKILLS,
-    direction: "down" as const,
-    speed: 26,
-    color: "bg-brand-primary",
-  },
-  {
-    skills: AI_SKILLS,
-    direction: "up" as const,
-    speed: 18,
-    color: "bg-accent",
-  },
+const CURRENT_FOCUS = [
+  "Backend architecture with NestJS and PostgreSQL",
+  "Site-scoped authorization and hierarchy-aware access",
+  "Schedule, activity, progress, and approval workflows",
+  "Translating incomplete requirements into implementable systems",
 ];
 
 export default function HeroSection() {
   return (
     <section
-      className="relative min-h-screen flex items-center justify-center px-8 md:px-16 lg:px-24 pb-16 md:pb-20  bg-brand-primary/10 border-b-8 border-foreground"
-      style={{ paddingTop: "calc(var(--navbar-h, 5rem) + 1rem)" }}
+      className="
+        border-b border-foreground/10
+        bg-background px-4 sm:px-6 lg:px-12
+      "
+      style={{
+        paddingTop: "var(--navbar-h, 5rem)",
+      }}
     >
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center w-full">
-        <div className="space-y-6 text-center lg:text-left">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+      <div
+        className="
+          mx-auto grid max-w-7xl
+          gap-12 py-16
+          md:py-20
+          lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.8fr)]
+          lg:items-center lg:gap-20 lg:py-24
+        "
+      >
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 16,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.5,
+          }}
+          className="min-w-0"
+        >
+          <p
+            className="
+              mb-5 text-xs font-semibold uppercase
+              tracking-[0.2em] text-foreground/45
+              sm:text-sm
+            "
           >
-            <div className="inline-block px-4 py-2 bg-foreground text-background font-black uppercase tracking-widest mb-4 border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)]">
-              Frontend Developer
+            Product-focused software engineer
+          </p>
+
+          <h1
+            className="
+              max-w-4xl
+              text-[clamp(2.75rem,6vw,5.25rem)]
+              font-semibold leading-[0.96]
+              tracking-[-0.055em] text-foreground
+            "
+          >
+            I design and build software for complex operations.
+          </h1>
+
+          <p
+            className="
+              mt-7 max-w-2xl text-lg leading-8
+              text-foreground/70 sm:text-xl
+            "
+          >
+            I work across product flows, interfaces, backend
+            services, data models, permissions, and AI
+            integrations.
+          </p>
+
+          <p
+            className="
+              mt-3 max-w-2xl text-base leading-7
+              text-foreground/50 sm:text-lg
+            "
+          >
+            Recent work includes industrial project management,
+            AI-assisted recruitment, and voice-agent operations.
+          </p>
+
+          <div
+            className="
+              mt-8 flex flex-col gap-3
+              sm:flex-row sm:flex-wrap
+            "
+          >
+            <a
+              href="#work"
+              className="
+                inline-flex min-h-12 items-center
+                justify-center gap-3
+                bg-foreground px-6 py-3
+                text-sm font-semibold text-background
+                transition-opacity hover:opacity-80
+              "
+            >
+              View selected work
+              <ArrowDownRight
+                size={18}
+                strokeWidth={1.9}
+                aria-hidden="true"
+              />
+            </a>
+
+            <a
+              href="/Abhijeet_Resume.pdf"
+              download
+              className="
+                inline-flex min-h-12 items-center
+                justify-center gap-3
+                border border-foreground/25
+                px-6 py-3 text-sm font-semibold
+                text-foreground
+                transition-colors
+                hover:border-foreground
+              "
+            >
+              Resume
+              <FileDown
+                size={17}
+                strokeWidth={1.9}
+                aria-hidden="true"
+              />
+            </a>
+
+            <a
+              href="#contact"
+              className="
+                inline-flex min-h-12 items-center
+                justify-center gap-3 px-5 py-3
+                text-sm font-semibold text-foreground/65
+                transition-colors hover:text-foreground
+              "
+            >
+              Contact
+              <Mail
+                size={17}
+                strokeWidth={1.9}
+                aria-hidden="true"
+              />
+            </a>
+          </div>
+
+          <div
+            className="
+              mt-9 border-t border-foreground/10 pt-5
+              text-sm leading-6 text-foreground/45
+            "
+          >
+            Available for product engineering, frontend
+            engineering, and full-stack opportunities.
+          </div>
+        </motion.div>
+
+        <motion.aside
+          initial={{
+            opacity: 0,
+            y: 16,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.5,
+            delay: 0.1,
+          }}
+          className="
+            border border-foreground/15
+            bg-foreground/5 p-6
+            sm:p-8
+          "
+        >
+          <div
+            className="
+              mb-7 flex items-center justify-between
+              gap-4 border-b border-foreground/15 pb-5
+            "
+          >
+            <div>
+              <p
+                className="
+                  text-xs font-semibold uppercase
+                  tracking-[0.18em] text-foreground/40
+                "
+              >
+                Current focus
+              </p>
+
+              <h2
+                className="
+                  mt-2 text-2xl font-semibold
+                  tracking-[-0.035em] text-foreground
+                "
+              >
+                Industrial project management
+              </h2>
             </div>
 
-            <HeroTitle />
-
-            {/* never increase text size more than 2xl */}
-
-            <p className="text-xl md:text-2xl font-black text-foreground max-w-2xl mx-auto lg:mx-0 leading-tight uppercase italic">
-              RESPONSIVE, INTERACTIVE UIs. <br />
-              FULL-STACK FOUNDATIONS. <br />
-              CLEAN, USER-FIRST CODE.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex flex-wrap justify-center lg:justify-start gap-4"
-          >
-            <Button
-              size="lg"
-              className="brutalist-button h-16 md:h-20 text-xl px-10"
-              asChild
+            <span
+              className="
+                shrink-0 border border-foreground/15
+                px-3 py-1 text-xs font-medium
+                text-foreground/50
+              "
             >
-              <a href="#projects">
-                VIEW WORK
-                <ArrowRight className="ml-4" size={28} />
-              </a>
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-8 h-16 md:h-20 text-xl font-black px-10"
-            >
-              CONNECT
-            </Button>
-          </motion.div>
-        </div>
+              In progress
+            </span>
+          </div>
 
-        {/* Tech Carousel */}
-        <div className="relative h-[550px] gap-4 justify-center lg:justify-end  md:flex z-0 ">
-          {HERO_CAROUSELS.map(({ skills, direction, speed, color }) => (
-            <InfiniteMarquee
-              key={color}
-              direction={direction}
-              speed={speed}
-              className="w-auto h-full"
-              gap="gap-5"
-            >
-              {skills.map((item) => (
-                <SkillCard
-                  key={item.name}
-                  name={item.name}
-                  src={item.src}
-                  size="sm"
-                  color={color}
-                />
-              ))}
-            </InfiniteMarquee>
-          ))}
-        </div>
+          <ul className="space-y-4">
+            {CURRENT_FOCUS.map((item, index) => (
+              <li
+                key={item}
+                className="
+                  grid grid-cols-[2rem_minmax(0,1fr)]
+                  gap-3 text-sm leading-6
+                  text-foreground/65
+                  sm:text-base
+                "
+              >
+                <span
+                  className="
+                    pt-0.5 text-xs font-semibold
+                    tracking-[0.12em] text-foreground/30
+                  "
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </motion.aside>
       </div>
     </section>
   );

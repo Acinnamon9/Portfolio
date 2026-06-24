@@ -1,0 +1,215 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { Button } from "../ui/Button";
+import {
+  FRONTEND_SKILLS,
+  BACKEND_SKILLS,
+  AI_SKILLS,
+} from "../../lib/constants";
+import { InfiniteMarquee } from "../ui/InfiniteMarquee";
+import { SkillCard } from "../ui/SkillCard";
+import { HeroTitle } from "../ui/HeroTitle";
+
+const HERO_CAROUSELS = [
+  {
+    skills: FRONTEND_SKILLS,
+    direction: "up" as const,
+    speed: 22,
+    color: "bg-brand-secondary",
+  },
+  {
+    skills: BACKEND_SKILLS,
+    direction: "down" as const,
+    speed: 26,
+    color: "bg-brand-primary",
+  },
+  {
+    skills: AI_SKILLS,
+    direction: "up" as const,
+    speed: 18,
+    color: "bg-accent",
+  },
+];
+
+const MOBILE_HERO_SKILLS = [
+  ...FRONTEND_SKILLS.map((skill) => ({
+    ...skill,
+    color: "bg-brand-secondary",
+  })),
+  ...BACKEND_SKILLS.map((skill) => ({
+    ...skill,
+    color: "bg-brand-primary",
+  })),
+  ...AI_SKILLS.map((skill) => ({
+    ...skill,
+    color: "bg-accent",
+  })),
+];
+
+export default function HeroSection() {
+  return (
+    <section
+      className="
+        relative flex min-h-[100svh] items-center overflow-hidden
+        border-b-4 border-foreground bg-brand-primary/10
+        px-4 pb-10
+        sm:px-6 sm:pb-14
+        md:border-b-8
+        lg:px-16 lg:pb-20
+        xl:px-24
+      "
+      style={{
+        paddingTop: "calc(var(--navbar-h, 5rem) + 2rem)",
+      }}
+    >
+      <div
+        className="
+          mx-auto grid w-full min-w-0 max-w-7xl
+          grid-cols-1 items-center gap-10
+          lg:grid-cols-2 lg:gap-12
+        "
+      >
+        <div className="min-w-0 space-y-5 text-center lg:text-left">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div
+              className="
+                mb-4 inline-block
+                border-2 border-foreground bg-foreground
+                px-3 py-2
+                text-xs font-black uppercase tracking-widest text-background
+                shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]
+                sm:border-4 sm:px-4 sm:text-sm
+                sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)]
+              "
+            >
+              Frontend Developer
+            </div>
+
+            <HeroTitle />
+
+            <p
+              className="
+                mx-auto max-w-2xl
+                text-base font-black uppercase italic leading-tight
+                text-foreground
+                sm:text-lg
+                md:text-xl
+                lg:mx-0 lg:text-2xl
+              "
+            >
+              Responsive, interactive UIs.
+              <br />
+              Full-stack foundations.
+              <br />
+              Clean, user-first code.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="
+              grid grid-cols-1 gap-3
+              sm:flex sm:flex-wrap sm:justify-center sm:gap-4
+              lg:justify-start
+            "
+          >
+            <Button
+              size="lg"
+              className="
+                brutalist-button w-full
+                h-14 px-6 text-base
+                sm:w-auto sm:h-16 sm:px-8 sm:text-lg
+                md:h-20 md:px-10 md:text-xl
+              "
+              asChild
+            >
+              <a href="#projects">
+                View work
+                <ArrowRight
+                  className="ml-3 sm:ml-4"
+                  size={24}
+                  aria-hidden="true"
+                />
+              </a>
+            </Button>
+
+            <Button
+              variant="outline"
+              size="lg"
+              className="
+                w-full border-4 font-black
+                h-14 px-6 text-base
+                sm:w-auto sm:h-16 sm:px-8 sm:text-lg
+                md:h-20 md:border-8 md:px-10 md:text-xl
+              "
+              asChild
+            >
+              <a href="#contact">Connect</a>
+            </Button>
+          </motion.div>
+        </div>
+
+        {/* Mobile and tablet carousel */}
+        <div className="min-w-0 overflow-hidden py-2 lg:hidden">
+          <InfiniteMarquee
+            direction="left"
+            speed={30}
+            pauseOnHover={false}
+            className="w-full"
+            gap="gap-4"
+          >
+            {MOBILE_HERO_SKILLS.map((item, index) => (
+              <SkillCard
+                key={`${item.name}-${index}`}
+                name={item.name}
+                src={item.src}
+                size="sm"
+                color={item.color}
+                animateOnHover={false}
+              />
+            ))}
+          </InfiniteMarquee>
+        </div>
+
+        {/* Desktop carousel */}
+        <div
+          className="
+            relative hidden h-[550px] min-w-0
+            justify-end gap-4 overflow-hidden
+            lg:flex
+          "
+        >
+          {HERO_CAROUSELS.map(
+            ({ skills, direction, speed, color }) => (
+              <InfiniteMarquee
+                key={color}
+                direction={direction}
+                speed={speed}
+                className="h-full w-auto"
+                gap="gap-5"
+              >
+                {skills.map((item) => (
+                  <SkillCard
+                    key={item.name}
+                    name={item.name}
+                    src={item.src}
+                    size="sm"
+                    color={color}
+                  />
+                ))}
+              </InfiniteMarquee>
+            ),
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
