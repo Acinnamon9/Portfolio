@@ -10,7 +10,7 @@ export async function GET(
     new URL(request.url).origin;
 
   const schema = {
-    openapi: "3.0.3",
+    openapi: "3.1.0",
 
     info: {
       title:
@@ -178,8 +178,17 @@ export async function GET(
 
           parameters: [
             {
-              $ref:
-                "#/components/parameters/BlogPostId",
+              name: "id",
+              in: "path",
+              required: true,
+
+              description:
+                "UUID of the blog post.",
+
+              schema: {
+                type: "string",
+                format: "uuid",
+              },
             },
           ],
 
@@ -230,8 +239,17 @@ export async function GET(
 
           parameters: [
             {
-              $ref:
-                "#/components/parameters/BlogPostId",
+              name: "id",
+              in: "path",
+              required: true,
+
+              description:
+                "UUID of the blog post.",
+
+              schema: {
+                type: "string",
+                format: "uuid",
+              },
             },
           ],
 
@@ -307,8 +325,17 @@ export async function GET(
 
           parameters: [
             {
-              $ref:
-                "#/components/parameters/BlogPostId",
+              name: "id",
+              in: "path",
+              required: true,
+
+              description:
+                "UUID of the blog post.",
+
+              schema: {
+                type: "string",
+                format: "uuid",
+              },
             },
           ],
 
@@ -361,8 +388,17 @@ export async function GET(
 
           parameters: [
             {
-              $ref:
-                "#/components/parameters/BlogPostId",
+              name: "id",
+              in: "path",
+              required: true,
+
+              description:
+                "UUID of the blog post.",
+
+              schema: {
+                type: "string",
+                format: "uuid",
+              },
             },
           ],
 
@@ -438,8 +474,17 @@ export async function GET(
 
           parameters: [
             {
-              $ref:
-                "#/components/parameters/BlogPostId",
+              name: "id",
+              in: "path",
+              required: true,
+
+              description:
+                "UUID of the blog post.",
+
+              schema: {
+                type: "string",
+                format: "uuid",
+              },
             },
           ],
 
@@ -492,8 +537,17 @@ export async function GET(
 
           parameters: [
             {
-              $ref:
-                "#/components/parameters/BlogPostId",
+              name: "id",
+              in: "path",
+              required: true,
+
+              description:
+                "UUID of the blog post.",
+
+              schema: {
+                type: "string",
+                format: "uuid",
+              },
             },
           ],
 
