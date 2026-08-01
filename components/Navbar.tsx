@@ -19,6 +19,10 @@ const NAVIGATION = [
     href: "/#work",
   },
   {
+    label: "Blog",
+    href: "/blog",
+  },
+  {
     label: "Contact",
     href: "/#contact",
   },
