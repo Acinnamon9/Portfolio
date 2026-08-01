@@ -3,12 +3,20 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "db:check": "drizzle-kit check",
+    "db:check-blog": "tsx scripts/check-blog-repository.ts",
+    "db:check-blog-api": "tsx scripts/check-blog-api.ts"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
     "@radix-ui/react-slot": "^1.2.4",
     "@tailwindcss/postcss": "^4.1.18",
     "clsx": "^2.1.1",
+    "drizzle-orm": "^0.45.2",
     "framer-motion": "^12.34.0",
     "lucide-react": "^0.564.0",
     "next": "^16.1.6",
@@ -16,15 +24,21 @@
     "react-dom": "^19.2.4",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
-    "tailwind-merge": "^3.4.0"
+    "tailwind-merge": "^3.4.0",
+    "ws": "^8.21.1",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "^25.2.3",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "@types/ws": "^8.18.1",
     "autoprefixer": "^10.4.24",
+    "dotenv": "^17.4.2",
+    "drizzle-kit": "^0.31.10",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18",
+    "tsx": "^4.23.1",
     "typescript": "^5.9.3"
   }
 }
