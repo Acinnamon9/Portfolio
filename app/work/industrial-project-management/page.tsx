@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -140,6 +141,39 @@ const STATUS = [
   },
 ];
 
+const PRODUCT_SCREENS = [
+  {
+    src: "/images/hmel/project-overview.png",
+    alt: "HMEL overview showing assigned projects and operational tools.",
+    title: "Project overview",
+    description: "Assigned projects and the operational entry points available to a field user.",
+  },
+  {
+    src: "/images/hmel/schedule-progress.png",
+    alt: "HMEL work-progress view showing activity status and completion bars.",
+    title: "Schedule progress",
+    description: "Activity status, completion, and schedule context against the active project plan.",
+  },
+  {
+    src: "/images/hmel/activity-verification.png",
+    alt: "HMEL activity progress detail with review status and hindrance summary.",
+    title: "Activity verification",
+    description: "A reported activity with review state, update history, and linked hindrance information.",
+  },
+  {
+    src: "/images/hmel/hindrance-reporting.png",
+    alt: "HMEL issue-reporting flow showing causes, severity, lost days, and existing reports.",
+    title: "Hindrance reporting",
+    description: "Structured issue capture separates reported delay from its reviewed schedule impact.",
+  },
+  {
+    src: "/images/hmel/project-chat.png",
+    alt: "HMEL project chat showing members, messages, and shared files.",
+    title: "Project communication",
+    description: "Project-scoped conversation and shared files keep operational context close to the work.",
+  },
+];
+
 export default function IndustrialProjectManagementCaseStudy() {
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -154,7 +188,7 @@ export default function IndustrialProjectManagementCaseStudy() {
           paddingTop: "var(--navbar-h, 5rem)",
         }}
       >
-        <div className="mx-auto max-w-6xl py-14 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-6xl py-10 sm:py-12 lg:py-14">
           <Link
             href="/#work"
             className="
@@ -173,9 +207,9 @@ export default function IndustrialProjectManagementCaseStudy() {
 
           <div
             className="
-              mt-12 grid gap-12
+              mt-8 grid gap-8
               lg:grid-cols-[minmax(0,1.2fr)_minmax(300px,0.65fr)]
-              lg:gap-20
+              lg:gap-12
             "
           >
             <div>
@@ -190,8 +224,8 @@ export default function IndustrialProjectManagementCaseStudy() {
 
               <h1
                 className="
-                  mt-5 max-w-4xl
-                  text-[clamp(2.75rem,6vw,5.5rem)]
+                  mt-4 max-w-4xl
+                  text-[clamp(2.5rem,4.5vw,4.25rem)]
                   font-semibold leading-[0.95]
                   tracking-[-0.055em]
                 "
@@ -201,8 +235,8 @@ export default function IndustrialProjectManagementCaseStudy() {
 
               <p
                 className="
-                  mt-7 max-w-3xl text-lg leading-8
-                  text-foreground/65 sm:text-xl
+                  mt-5 max-w-3xl text-base leading-7
+                  text-foreground/65 sm:text-lg
                 "
               >
                 Enterprise backend for coordinating industrial
@@ -218,7 +252,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                 border-y border-foreground/10
               "
             >
-              <div className="grid grid-cols-[6rem_1fr] gap-4 py-4">
+              <div className="grid grid-cols-[5rem_1fr] gap-3 py-3">
                 <dt
                   className="
                     text-xs font-semibold uppercase
@@ -232,7 +266,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                 </dd>
               </div>
 
-              <div className="grid grid-cols-[6rem_1fr] gap-4 py-4">
+              <div className="grid grid-cols-[5rem_1fr] gap-3 py-3">
                 <dt
                   className="
                     text-xs font-semibold uppercase
@@ -246,7 +280,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                 </dd>
               </div>
 
-              <div className="grid grid-cols-[6rem_1fr] gap-4 py-4">
+              <div className="grid grid-cols-[5rem_1fr] gap-3 py-3">
                 <dt
                   className="
                     text-xs font-semibold uppercase
@@ -260,7 +294,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                 </dd>
               </div>
 
-              <div className="grid grid-cols-[6rem_1fr] gap-4 py-4">
+              <div className="grid grid-cols-[5rem_1fr] gap-3 py-3">
                 <dt
                   className="
                     text-xs font-semibold uppercase
@@ -278,13 +312,13 @@ export default function IndustrialProjectManagementCaseStudy() {
         </div>
       </header>
 
-      <section className="px-4 py-20 sm:px-6 sm:py-24 lg:px-12">
+      <section className="px-4 py-14 sm:px-6 sm:py-14 lg:px-12">
         <div className="mx-auto max-w-6xl">
           <div
             className="
-              grid gap-10
+              grid gap-8
               lg:grid-cols-[minmax(220px,0.4fr)_minmax(0,1fr)]
-              lg:gap-20
+              lg:gap-12
             "
           >
             <div>
@@ -301,9 +335,9 @@ export default function IndustrialProjectManagementCaseStudy() {
             <div>
               <h2
                 className="
-                  max-w-3xl text-3xl font-semibold
+                  max-w-3xl text-2xl font-semibold
                   leading-tight tracking-[-0.04em]
-                  sm:text-4xl
+                  sm:text-3xl
                 "
               >
                 Project-management data is useful only when the system can establish who may change it—and which version of the truth is trusted.
@@ -311,8 +345,8 @@ export default function IndustrialProjectManagementCaseStudy() {
 
               <div
                 className="
-                  mt-7 max-w-3xl space-y-5
-                  text-base leading-8 text-foreground/65
+                  mt-5 max-w-3xl space-y-3
+                  text-base leading-7 text-foreground/65
                   sm:text-lg
                 "
               >
@@ -329,7 +363,7 @@ export default function IndustrialProjectManagementCaseStudy() {
 
           <div
             className="
-              mt-14 grid gap-px overflow-hidden
+              mt-8 grid gap-px overflow-hidden
               border border-foreground/10
               bg-foreground/10
               sm:grid-cols-2
@@ -338,7 +372,7 @@ export default function IndustrialProjectManagementCaseStudy() {
             {PLATFORM_AREAS.map((area) => (
               <article
                 key={area.title}
-                className="bg-background p-6 sm:p-8"
+                className="bg-background p-4 sm:p-5"
               >
                 <h3
                   className="
@@ -351,7 +385,7 @@ export default function IndustrialProjectManagementCaseStudy() {
 
                 <p
                   className="
-                    mt-3 text-sm leading-6
+                    mt-2 text-sm leading-6
                     text-foreground/60 sm:text-base
                   "
                 >
@@ -363,21 +397,70 @@ export default function IndustrialProjectManagementCaseStudy() {
         </div>
       </section>
 
+      <section className="px-4 py-14 sm:px-6 sm:py-14 lg:px-12">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-8 lg:grid-cols-[minmax(220px,0.4fr)_minmax(0,1fr)] lg:gap-12">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">
+                02 · Product in use
+              </p>
+            </div>
+
+            <div>
+              <h2 className="max-w-3xl text-2xl font-semibold leading-tight tracking-[-0.04em] sm:text-3xl">
+                Operational workflows made visible in the product.
+              </h2>
+              <p className="mt-4 max-w-3xl text-base leading-7 text-foreground/60 sm:text-lg">
+                These screens show how planning, progress reporting, hindrance management, and project communication surface through the HMEL application.
+              </p>
+
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                {PRODUCT_SCREENS.map((screen, index) => (
+                  <figure
+                    key={screen.src}
+                    className={`overflow-hidden border border-foreground/10 bg-background ${
+                      index === 0
+                        ? "md:col-span-2 md:grid md:grid-cols-[minmax(0,1.45fr)_minmax(15rem,0.55fr)]"
+                        : ""
+                    }`}
+                  >
+                    <Image
+                      src={screen.src}
+                      alt={screen.alt}
+                      width={1920}
+                      height={1080}
+                      className={`h-auto w-full border-b border-foreground/10 ${
+                        index === 0 ? "md:border-r md:border-b-0" : ""
+                      }`}
+                      priority={index === 0}
+                    />
+                    <figcaption className="p-4 sm:p-5">
+                      <h3 className="font-semibold">{screen.title}</h3>
+                      <p className="mt-1 text-sm leading-6 text-foreground/60">{screen.description}</p>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section
         className="
           border-y border-foreground/10
           bg-foreground/5
-          px-4 py-20
-          sm:px-6 sm:py-24
+          px-4 py-14
+          sm:px-6 sm:py-14
           lg:px-12
         "
       >
         <div className="mx-auto max-w-6xl">
           <div
             className="
-              grid gap-10
+              grid gap-8
               lg:grid-cols-[minmax(220px,0.4fr)_minmax(0,1fr)]
-              lg:gap-20
+              lg:gap-12
             "
           >
             <div>
@@ -387,28 +470,28 @@ export default function IndustrialProjectManagementCaseStudy() {
                   tracking-[0.2em] text-foreground/40
                 "
               >
-                02 · My contribution
+                03 · My contribution
               </p>
             </div>
 
             <div>
               <h2
                 className="
-                  max-w-3xl text-3xl font-semibold
+                  max-w-3xl text-2xl font-semibold
                   leading-tight tracking-[-0.04em]
-                  sm:text-4xl
+                  sm:text-3xl
                 "
               >
                 Turning operational ambiguity into backend boundaries.
               </h2>
 
-              <div className="mt-9 grid gap-4 sm:grid-cols-2">
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 {CONTRIBUTIONS.map((contribution) => (
                   <div
                     key={contribution}
                     className="
                       flex gap-3 border-t
-                      border-foreground/15 pt-4
+                      border-foreground/15 pt-3
                     "
                   >
                     <CheckCircle2
@@ -432,7 +515,7 @@ export default function IndustrialProjectManagementCaseStudy() {
 
               <p
                 className="
-                  mt-8 max-w-3xl text-sm leading-7
+                  mt-5 max-w-3xl text-sm leading-6
                   text-foreground/45
                 "
               >
@@ -446,13 +529,13 @@ export default function IndustrialProjectManagementCaseStudy() {
         </div>
       </section>
 
-      <section className="px-4 py-20 sm:px-6 sm:py-24 lg:px-12">
+      <section className="px-4 py-14 sm:px-6 sm:py-14 lg:px-12">
         <div className="mx-auto max-w-6xl">
           <div
             className="
-              grid gap-10
+              grid gap-8
               lg:grid-cols-[minmax(220px,0.4fr)_minmax(0,1fr)]
-              lg:gap-20
+              lg:gap-12
             "
           >
             <div>
@@ -462,16 +545,16 @@ export default function IndustrialProjectManagementCaseStudy() {
                   tracking-[0.2em] text-foreground/40
                 "
               >
-                03 · Authorization
+                04 · Authorization
               </p>
             </div>
 
             <div>
               <h2
                 className="
-                  max-w-3xl text-3xl font-semibold
+                  max-w-3xl text-2xl font-semibold
                   leading-tight tracking-[-0.04em]
-                  sm:text-4xl
+                  sm:text-3xl
                 "
               >
                 Authorization is evaluated against the resource’s real scope, not identifiers supplied by the client.
@@ -479,7 +562,7 @@ export default function IndustrialProjectManagementCaseStudy() {
 
               <p
                 className="
-                  mt-6 max-w-3xl text-base leading-8
+                  mt-4 max-w-3xl text-base leading-7
                   text-foreground/60 sm:text-lg
                 "
               >
@@ -488,15 +571,15 @@ export default function IndustrialProjectManagementCaseStudy() {
 
               <ol
                 className="
-                  mt-10 border-y border-foreground/15
+                  mt-6 border-y border-foreground/15
                 "
               >
                 {AUTHORIZATION_FLOW.map((step) => (
                   <li
                     key={step.number}
                     className="
-                      grid gap-4 border-b
-                      border-foreground/10 py-6
+                      grid gap-3 border-b
+                      border-foreground/10 py-4
                       last:border-b-0
                       sm:grid-cols-[3rem_14rem_minmax(0,1fr)]
                       sm:items-start
@@ -535,8 +618,8 @@ export default function IndustrialProjectManagementCaseStudy() {
         className="
           border-y border-foreground/10
           bg-foreground text-background
-          px-4 py-20
-          sm:px-6 sm:py-24
+          px-4 py-14
+          sm:px-6 sm:py-14
           lg:px-12
         "
       >
@@ -556,7 +639,7 @@ export default function IndustrialProjectManagementCaseStudy() {
 
           <div
             className="
-              mt-8 grid gap-3
+              mt-5 grid gap-2
               md:grid-cols-5
             "
           >
@@ -570,9 +653,9 @@ export default function IndustrialProjectManagementCaseStudy() {
               <div
                 key={item}
                 className="
-                  flex min-h-28 flex-col
+                  flex min-h-20 flex-col
                   justify-between border
-                  border-background/20 p-4
+                  border-background/20 p-3
                 "
               >
                 <span
@@ -584,7 +667,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                   {String(index + 1).padStart(2, "0")}
                 </span>
 
-                <span className="mt-6 text-sm font-medium leading-5">
+                <span className="mt-4 text-sm font-medium leading-5">
                   {item}
                 </span>
               </div>
@@ -593,13 +676,13 @@ export default function IndustrialProjectManagementCaseStudy() {
         </div>
       </section>
 
-      <section className="px-4 py-20 sm:px-6 sm:py-24 lg:px-12">
+      <section className="px-4 py-14 sm:px-6 sm:py-14 lg:px-12">
         <div className="mx-auto max-w-6xl">
           <div
             className="
-              grid gap-10
+              grid gap-8
               lg:grid-cols-[minmax(220px,0.4fr)_minmax(0,1fr)]
-              lg:gap-20
+              lg:gap-12
             "
           >
             <div>
@@ -609,22 +692,22 @@ export default function IndustrialProjectManagementCaseStudy() {
                   tracking-[0.2em] text-foreground/40
                 "
               >
-                04 · Engineering decisions
+                05 · Engineering decisions
               </p>
             </div>
 
             <div>
               <h2
                 className="
-                  max-w-3xl text-3xl font-semibold
+                  max-w-3xl text-2xl font-semibold
                   leading-tight tracking-[-0.04em]
-                  sm:text-4xl
+                  sm:text-3xl
                 "
               >
                 Architectural choices made for change, not only today.
               </h2>
 
-              <div className="mt-10 grid gap-8 sm:grid-cols-2">
+              <div className="mt-6 grid gap-5 sm:grid-cols-2">
                 {DECISIONS.map((decision) => {
                   const Icon = decision.icon;
 
@@ -632,7 +715,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                     <article
                       key={decision.title}
                       className="
-                        border-t border-foreground/20 pt-5
+                        border-t border-foreground/20 pt-4
                       "
                     >
                       <Icon
@@ -644,7 +727,7 @@ export default function IndustrialProjectManagementCaseStudy() {
 
                       <h3
                         className="
-                          mt-5 text-xl font-semibold
+                          mt-3 text-lg font-semibold
                           tracking-[-0.025em]
                         "
                       >
@@ -653,7 +736,7 @@ export default function IndustrialProjectManagementCaseStudy() {
 
                       <p
                         className="
-                          mt-3 text-sm leading-7
+                          mt-2 text-sm leading-6
                           text-foreground/60 sm:text-base
                         "
                       >
@@ -668,38 +751,38 @@ export default function IndustrialProjectManagementCaseStudy() {
         </div>
       </section>
 
-      <section className="border-y border-foreground/10 bg-foreground/5 px-4 py-20 sm:px-6 sm:py-24 lg:px-12">
+      <section className="border-y border-foreground/10 bg-foreground/5 px-4 py-14 sm:px-6 sm:py-14 lg:px-12">
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-10 lg:grid-cols-[minmax(220px,0.4fr)_minmax(0,1fr)] lg:gap-20">
+          <div className="grid gap-8 lg:grid-cols-[minmax(220px,0.4fr)_minmax(0,1fr)] lg:gap-12">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">
-                05 · Planning &amp; verification
+                06 · Planning &amp; verification
               </p>
             </div>
 
             <div>
-              <h2 className="max-w-3xl text-3xl font-semibold leading-tight tracking-[-0.04em] sm:text-4xl">
+              <h2 className="max-w-3xl text-2xl font-semibold leading-tight tracking-[-0.04em] sm:text-3xl">
                 Project schedules are versioned data; field reports become trusted only through verification.
               </h2>
 
-              <div className="mt-9 grid gap-8 sm:grid-cols-2">
-                <article className="border-t border-foreground/15 pt-5">
-                  <h3 className="text-xl font-semibold tracking-[-0.025em]">Planning and scheduling</h3>
-                  <p className="mt-3 text-sm leading-7 text-foreground/60 sm:text-base">
+              <div className="mt-6 grid gap-5 sm:grid-cols-2">
+                <article className="border-t border-foreground/15 pt-4">
+                  <h3 className="text-lg font-semibold tracking-[-0.025em]">Planning and scheduling</h3>
+                  <p className="mt-2 text-sm leading-6 text-foreground/60 sm:text-base">
                     Excel-based imports, workbook validation, schedule versions and activation, activities, dependencies, health calculations, reusable templates, parameterized generation, and resource requirements keep current plans distinct from superseded ones.
                   </p>
                 </article>
-                <article className="border-t border-foreground/15 pt-5">
-                  <h3 className="text-xl font-semibold tracking-[-0.025em]">Field execution and review</h3>
-                  <p className="mt-3 text-sm leading-7 text-foreground/60 sm:text-base">
+                <article className="border-t border-foreground/15 pt-4">
+                  <h3 className="text-lg font-semibold tracking-[-0.025em]">Field execution and review</h3>
+                  <p className="mt-2 text-sm leading-6 text-foreground/60 sm:text-base">
                     Progress submissions with evidence enter a review queue before approval, adjustment, return, or rejection. Hindrances are independently verified, while manpower, material, and equipment are reported as operational resources.
                   </p>
                 </article>
               </div>
 
-              <div className="mt-9 border border-foreground/10 bg-background p-5 sm:p-6">
+              <div className="mt-6 border border-foreground/10 bg-background p-4 sm:p-5">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-foreground/40">Trusted project state</p>
-                <p className="mt-4 font-medium leading-7 text-foreground/80">
+                <p className="mt-3 font-medium leading-6 text-foreground/80">
                   Activity → Progress submission → Supporting evidence → Review queue → Approve / Adjust / Return / Reject → Trusted activity actual
                 </p>
               </div>
@@ -712,17 +795,17 @@ export default function IndustrialProjectManagementCaseStudy() {
         className="
           border-y border-foreground/10
           bg-foreground/5
-          px-4 py-20
-          sm:px-6 sm:py-24
+          px-4 py-14
+          sm:px-6 sm:py-14
           lg:px-12
         "
       >
         <div className="mx-auto max-w-6xl">
           <div
             className="
-              grid gap-10
+              grid gap-8
               lg:grid-cols-[minmax(220px,0.4fr)_minmax(0,1fr)]
-              lg:gap-20
+              lg:gap-12
             "
           >
             <div>
@@ -732,31 +815,31 @@ export default function IndustrialProjectManagementCaseStudy() {
                   tracking-[0.2em] text-foreground/40
                 "
               >
-                06 · Current state
+                07 · Current state
               </p>
             </div>
 
             <div>
               <h2
                 className="
-                  max-w-3xl text-3xl font-semibold
+                  max-w-3xl text-2xl font-semibold
                   leading-tight tracking-[-0.04em]
-                  sm:text-4xl
+                  sm:text-3xl
                 "
               >
                 A substantial backend foundation, still evolving with the product.
               </h2>
 
-              <div className="mt-10 space-y-3">
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 {STATUS.map((item) => (
                   <article
                     key={item.title}
                     className="
-                      grid gap-4 border
+                      grid gap-3 border
                       border-foreground/10
-                      bg-background p-5
-                      sm:grid-cols-[1.5rem_14rem_minmax(0,1fr)]
-                      sm:items-start sm:p-6
+                      bg-background p-4
+                      sm:grid-cols-[1.5rem_minmax(0,1fr)]
+                      sm:items-start sm:p-5
                     "
                   >
                     {item.state === "complete" ? (
@@ -775,14 +858,14 @@ export default function IndustrialProjectManagementCaseStudy() {
                       />
                     )}
 
-                    <h3 className="font-semibold">
+                    <h3 className="font-semibold sm:col-start-2">
                       {item.title}
                     </h3>
 
                     <p
                       className="
                         text-sm leading-6
-                        text-foreground/60 sm:text-base
+                        text-foreground/60 sm:col-span-2 sm:text-base
                       "
                     >
                       {item.description}
@@ -795,13 +878,13 @@ export default function IndustrialProjectManagementCaseStudy() {
         </div>
       </section>
 
-      <section className="px-4 py-20 sm:px-6 sm:py-24 lg:px-12">
+      <section className="px-4 py-14 sm:px-6 sm:py-14 lg:px-12">
         <div className="mx-auto max-w-6xl">
           <div
             className="
-              grid gap-10
+              grid gap-8
               lg:grid-cols-[minmax(220px,0.4fr)_minmax(0,1fr)]
-              lg:gap-20
+              lg:gap-12
             "
           >
             <div>
@@ -811,16 +894,16 @@ export default function IndustrialProjectManagementCaseStudy() {
                   tracking-[0.2em] text-foreground/40
                 "
               >
-                07 · Security &amp; testing
+                08 · Security &amp; testing
               </p>
             </div>
 
             <div>
               <h2
                 className="
-                  max-w-3xl text-3xl font-semibold
+                  max-w-3xl text-2xl font-semibold
                   leading-tight tracking-[-0.04em]
-                  sm:text-4xl
+                  sm:text-3xl
                 "
               >
                 Fail safely at the boundary, then prove the behaviour through real application paths.
@@ -828,8 +911,8 @@ export default function IndustrialProjectManagementCaseStudy() {
 
               <div
                 className="
-                  mt-7 max-w-3xl space-y-5
-                  text-base leading-8 text-foreground/65
+                  mt-5 max-w-3xl space-y-3
+                  text-base leading-7 text-foreground/65
                   sm:text-lg
                 "
               >
@@ -846,17 +929,17 @@ export default function IndustrialProjectManagementCaseStudy() {
                 </p>
               </div>
 
-              <div className="mt-10 border-t border-foreground/15 pt-7">
+              <div className="mt-6 border-t border-foreground/15 pt-5">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-foreground/40">What this project taught me</p>
-                <p className="mt-4 max-w-3xl text-base leading-8 text-foreground/65 sm:text-lg">
+                <p className="mt-3 max-w-3xl text-base leading-7 text-foreground/65 sm:text-lg">
                   Backend engineering for operational software is primarily about preserving invariants across boundaries: who may change state, at what scope, which data is authoritative, what survives retries and concurrent actions, and what must remain auditable.
                 </p>
               </div>
 
               <div
                 className="
-                  mt-10 flex flex-col gap-3
-                  border-t border-foreground/15 pt-7
+                  mt-6 flex flex-col gap-3
+                  border-t border-foreground/15 pt-5
                   sm:flex-row
                 "
               >
