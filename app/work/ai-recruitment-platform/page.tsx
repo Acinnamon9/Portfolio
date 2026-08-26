@@ -6,6 +6,7 @@ import {
   BrainCircuit,
   CheckCircle2,
   CircleAlert,
+  ExternalLink,
   Mail,
   PhoneCall,
   ShieldCheck,
@@ -22,12 +23,31 @@ export const metadata: Metadata = {
 };
 
 const CONTRIBUTIONS = [
-  "Worked across recruiter, manager, interviewer, administrator, and executive product surfaces.",
-  "Helped model recruitment as a connected lifecycle rather than a collection of unrelated dashboards.",
-  "Worked on database-backed candidate, job, communication, task, and workflow behaviour.",
-  "Implemented and debugged transactional email delivery using Resend.",
-  "Investigated authentication, permission, request, and provider-delivery failures.",
-  "Helped distinguish implemented product behaviour from mock adapters and future integrations.",
+  "Modelled jobs, applications, candidates, screenings, communications, recruiter decisions, and manager handoffs as connected stateful workflows.",
+  "Worked on the TalentStream ↔ Agni integration for AI screening calls, including callback, retry, no-answer, provider-failure, and attempt-history paths.",
+  "Designed webhook handling to be idempotent and to protect parent screening state from stale or late provider callbacks.",
+  "Worked on the asynchronous resume pipeline: ingestion, extraction, parsing, normalization, scoring, and recruiter-facing results.",
+  "Debugged authentication, authorization, transactional email, and external-provider failures across Clerk, Resend, database, and request boundaries.",
+  "Helped distinguish implemented product behaviour from mock adapters, future integrations, and AI-assisted decisions requiring human authority.",
+];
+
+const ENGINEERING_HIGHLIGHTS = [
+  {
+    title: "Stateful workflows",
+    description: "Explicit states, transitions, audit history, and failure paths connect recruitment work instead of leaving it across isolated dashboards.",
+  },
+  {
+    title: "AI call orchestration",
+    description: "Screenings preserve attempts, callbacks, retries, provider outcomes, and context recovery before final aggregation.",
+  },
+  {
+    title: "Resume intelligence",
+    description: "Asynchronous extraction, parsing, normalization, and scoring make recruiter-facing results more durable than one synchronous model call.",
+  },
+  {
+    title: "Reliability at boundaries",
+    description: "Idempotency, authorization, webhook handling, observability, and provider-failure paths keep external integrations safe to operate.",
+  },
 ];
 
 const PRINCIPLES = [
@@ -139,7 +159,9 @@ export default function AIRecruitmentPlatformPage() {
                 "
               >
                 <a
-                  href="#walkthrough"
+                  href="https://talentstream.ravan.ai/"
+                  target="_blank"
+                  rel="noreferrer"
                   className="
                     inline-flex min-h-12
                     items-center justify-center
@@ -147,6 +169,25 @@ export default function AIRecruitmentPlatformPage() {
                     px-5 py-3 text-sm
                     font-semibold text-background
                     transition-opacity hover:opacity-80
+                  "
+                >
+                  View live product
+                  <ExternalLink
+                    size={16}
+                    strokeWidth={1.8}
+                    aria-hidden="true"
+                  />
+                </a>
+
+                <a
+                  href="#walkthrough"
+                  className="
+                    inline-flex min-h-12
+                    items-center justify-center
+                    gap-2 border border-foreground/20
+                    px-5 py-3 text-sm
+                    font-semibold
+                    transition-colors hover:border-foreground
                   "
                 >
                   Run interactive walkthrough
@@ -218,7 +259,7 @@ export default function AIRecruitmentPlatformPage() {
                 </dt>
 
                 <dd className="text-sm leading-6 text-foreground/68">
-                  Product, frontend, workflow, and integration work
+                  Product &amp; full-stack engineering: recruitment workflows, AI screening orchestration, integrations, and platform reliability
                 </dd>
               </div>
 
@@ -239,7 +280,7 @@ export default function AIRecruitmentPlatformPage() {
                 </dt>
 
                 <dd className="text-sm leading-6 text-foreground/68">
-                  Next.js, TypeScript, PostgreSQL, Clerk, Resend
+                  Next.js, TypeScript, PostgreSQL, Drizzle ORM, Clerk, Resend, webhooks, background jobs, and AI integrations
                 </dd>
               </div>
 
@@ -266,33 +307,11 @@ export default function AIRecruitmentPlatformPage() {
             </dl>
           </div>
 
-          <div
-            className="
-              mt-12 flex items-start gap-3
-              border border-amber-500/30
-              bg-amber-500/[0.06]
-              p-4
-            "
-          >
-            <CircleAlert
-              size={18}
-              strokeWidth={1.7}
-              className="mt-0.5 shrink-0 text-amber-500"
-              aria-hidden="true"
-            />
-
-            <p className="text-sm leading-6 text-foreground/58">
-              The walkthrough below is an illustrative simulation
-              using fictional candidate data. It demonstrates the
-              product model and engineering boundaries without
-              exposing client data, private source code, or claiming
-              that every proposed integration is active in production.
-            </p>
-          </div>
         </div>
       </header>
 
       <section
+        id="walkthrough"
         className="
           px-4 py-16
           sm:px-6 sm:py-20
@@ -345,6 +364,41 @@ export default function AIRecruitmentPlatformPage() {
           </div>
 
           <InteractiveRecruitmentWalkthrough />
+
+          <div className="mt-6 flex items-start gap-3 border border-amber-500/30 bg-amber-500/[0.06] p-4">
+            <CircleAlert
+              size={18}
+              strokeWidth={1.7}
+              className="mt-0.5 shrink-0 text-amber-500"
+              aria-hidden="true"
+            />
+            <p className="text-sm leading-6 text-foreground/58">
+              <span className="font-semibold text-foreground/75">Demo note:</span>{" "}
+              This walkthrough uses fictional candidate data and recreates product behaviour without exposing private production data or source code.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-foreground/10 bg-foreground/[0.035] px-4 py-16 sm:px-6 sm:py-20 lg:px-12">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.65fr_1.35fr] lg:gap-16">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/38">
+              Engineering highlights
+            </p>
+            <h2 className="mt-4 text-3xl font-semibold leading-[1.03] tracking-[-0.045em] sm:text-4xl">
+              The systems work behind the recruiter experience.
+            </h2>
+          </div>
+
+          <div className="grid gap-px overflow-hidden border border-foreground/10 bg-foreground/10 sm:grid-cols-2">
+            {ENGINEERING_HIGHLIGHTS.map((highlight) => (
+              <article key={highlight.title} className="bg-background p-5 sm:p-6">
+                <h3 className="text-lg font-semibold tracking-[-0.025em]">{highlight.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-foreground/60 sm:text-base">{highlight.description}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -592,16 +646,20 @@ export default function AIRecruitmentPlatformPage() {
               aria-hidden="true"
             />
 
+            <p className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-background/45">
+              Hard engineering problem
+            </p>
+
             <h2
               className="
-                mt-6 max-w-3xl normal-case
+                mt-3 max-w-3xl normal-case
                 text-4xl font-semibold
                 leading-[1.04]
                 tracking-[-0.045em]
                 sm:text-5xl
               "
             >
-              Agni conducts the conversation.
+              A screening is not equivalent to one phone call.
             </h2>
           </div>
 
@@ -612,21 +670,29 @@ export default function AIRecruitmentPlatformPage() {
                 text-background/64
               "
             >
-              TalentStream understands why the conversation is
-              happening, what evidence is required, which candidate
-              and job it belongs to, who can make the next decision,
-              and how the complete process should be recorded.
+              Candidates can miss calls, request callbacks, reschedule, or disconnect midway. I helped model screening as a parent workflow containing individual attempts, preserving evidence while preventing stale callbacks from corrupting current state.
             </p>
 
-            <p
-              className="
-                mt-5 max-w-3xl text-lg font-semibold
-                leading-8
-              "
-            >
-              That surrounding operational system is what turns an
-              AI caller into a recruitment product.
-            </p>
+            <div className="mt-8 grid gap-5 md:grid-cols-2">
+              <div className="border border-background/20 p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-background/45">Multi-attempt screening</p>
+                <ol className="mt-4 space-y-3 text-sm leading-6 text-background/72">
+                  <li><span className="font-semibold text-background">01 · Attempt #1</span> — callback requested</li>
+                  <li><span className="font-semibold text-background">02 · Callback booking</span> — context retained</li>
+                  <li><span className="font-semibold text-background">03 · Attempt #2</span> — no answer</li>
+                  <li><span className="font-semibold text-background">04 · Attempt #3</span> — completed → final scoring</li>
+                </ol>
+              </div>
+
+              <div className="border border-background/20 p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-background/45">System boundary</p>
+                <div className="mt-4 space-y-3 text-sm leading-6 text-background/72">
+                  <p><span className="font-semibold text-background">TalentStream</span> — job, application, consent, screening state, retry policy, recruiter decisions, and audit trail.</p>
+                  <p><span className="font-semibold text-background">Agni</span> — AI conversation, transcript, recording, and extracted evidence.</p>
+                  <p className="border-t border-background/15 pt-3"><span className="font-semibold text-background">Callbacks + scoring workers</span> return evidence to the recruitment workflow for a human decision.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
