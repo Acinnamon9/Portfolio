@@ -87,7 +87,8 @@ export default function HeroSection() {
             "
           >
             Recent work includes industrial project management,
-            AI-assisted recruitment, and voice-agent operations.
+            AI-assisted recruitment, voice-agent operations, and
+            agentic commerce.
           </p>
 
           <div

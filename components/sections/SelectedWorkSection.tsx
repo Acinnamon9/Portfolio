@@ -65,6 +65,26 @@ const PROJECTS = [
     ],
     href: null,
   },
+  {
+    number: "04",
+    title: "Voice-driven agentic commerce",
+    category: "Agentic commerce and browser execution",
+    context:
+      "An experimental e-commerce system where a conversational AI understands the shopper’s page and cart, searches a grounded catalog, and performs shopping actions directly in the browser.",
+    contribution:
+      "Designed and implemented the storefront-agent integration, session architecture, browser action bridge, commerce tools, product grounding, voice interface, and execution feedback loop.",
+    decision:
+      "Separated AI intent from browser execution: the model requests typed actions, while a deterministic client-side bridge validates and performs them, then reports the real outcome back to the agent.",
+    status: "Working prototype",
+    stack: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "LiveKit / WebRTC",
+      "AI tool calling",
+    ],
+    href: null,
+  },
 ];
 
 export default function SelectedWorkSection() {
