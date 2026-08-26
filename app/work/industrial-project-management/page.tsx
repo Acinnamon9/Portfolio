@@ -17,71 +17,72 @@ export const metadata: Metadata = {
   title:
     "Industrial Project-Management Platform | Abhijeet Singh",
   description:
-    "A case study covering backend architecture, site-scoped authorization, schedules, activity retrieval, progress workflows, and operational requirements.",
+    "A case study covering industrial planning, field execution, scoped authorization, transactional workflows, and backend reliability.",
 };
 
 const PLATFORM_AREAS = [
   {
-    title: "Site operations",
+    title: "Project planning",
     description:
-      "Field teams record work, resources, hindrances, attendance, and supporting evidence from active project sites.",
+      "Schedules, versions, activities, dependencies, templates, and generated plans establish a controlled project baseline.",
   },
   {
-    title: "Progress control",
+    title: "Field execution",
     description:
-      "Submitted progress moves through review and approval before becoming part of the trusted project record.",
+      "Teams submit progress, supporting evidence, resource usage, and hindrances from active project sites.",
   },
   {
-    title: "Project visibility",
+    title: "Verification",
     description:
-      "Supervisors and management need information scoped to the sites and projects they are authorized to oversee.",
+      "Reported information moves through review, adjustment, return, or approval before it becomes trusted project state.",
   },
   {
-    title: "Administration",
+    title: "Management visibility",
     description:
-      "Administrators configure users, roles, permissions, schedules, and project structures without hard-coding every organizational change.",
+      "Authorized supervisors and managers see schedule health and operational data at the organization, project, or site scope they oversee.",
   },
 ];
 
 const CONTRIBUTIONS = [
-  "Established and validated the NestJS backend foundation.",
-  "Worked on the PostgreSQL and TypeORM domain model and migrations.",
-  "Defined API contracts around projects, sites, schedules, and activities.",
-  "Helped interpret incomplete and occasionally conflicting operational requirements.",
-  "Designed authorization around permissions, scope, and site ancestry.",
-  "Planned implementation as small end-to-end capabilities rather than one large release.",
+  "Designed modular NestJS boundaries around projects, planning, execution, IAM, audit, notifications, and shared infrastructure.",
+  "Modelled the PostgreSQL domain and implemented schema evolution through TypeORM migrations.",
+  "Designed Organization → Project → Site scoped authorization without tying behaviour to fixed job titles.",
+  "Built versioned REST contracts and OpenAPI documentation for planning and operational workflows.",
+  "Implemented transactional field-execution and verification workflows with explicit domain rules.",
+  "Introduced idempotency, audit events, transactional outbox messages, request tracing, validation, and standardized errors.",
+  "Converted incomplete or conflicting operational requirements into testable backend invariants.",
 ];
 
 const AUTHORIZATION_FLOW = [
   {
     number: "01",
-    title: "Authenticate the user",
+    title: "Resolve the actor",
     description:
-      "Resolve the identity making the request before any project data is queried.",
+      "Establish the authenticated user and verify that the account is active and the identity is valid.",
   },
   {
     number: "02",
-    title: "Resolve site ancestry",
+    title: "Resolve the target scope",
     description:
-      "Determine how the requested site belongs to the wider project and organizational hierarchy.",
+      "Load the canonical Organization → Project → Site relationship from backend-controlled data rather than trusting client-supplied scope identifiers.",
   },
   {
     number: "03",
-    title: "Evaluate permission at site scope",
+    title: "Find applicable assignments",
     description:
-      "Check whether the user has the required capability for that site or an authorized ancestor.",
+      "Determine which active, currently valid role assignments contain the target scope.",
   },
   {
     number: "04",
-    title: "Select the active schedule version",
+    title: "Resolve permissions and exceptions",
     description:
-      "Avoid returning obsolete activities from superseded project schedules.",
+      "Evaluate permissions from applicable role templates, then apply scoped individual GRANT or DENY exceptions. DENY takes precedence.",
   },
   {
     number: "05",
-    title: "Return authorized activities",
+    title: "Scope the database operation",
     description:
-      "Query only the activities belonging to the permitted project, site, and active schedule version.",
+      "Use authorization-derived predicates so unauthorized records are never loaded first and filtered afterwards.",
   },
 ];
 
@@ -94,9 +95,9 @@ const DECISIONS = [
   },
   {
     icon: GitBranch,
-    title: "Authorization follows site hierarchy",
+    title: "Hierarchical scope, not a flat access flag",
     description:
-      "Access is not treated as a flat project-wide flag. A user may be authorized at a specific site, across descendants of a parent site, or at a broader project scope.",
+      "Access follows Organization → Project → Site containment. Organization scope reaches its projects and sites; project scope reaches its sites; site scope reaches only that exact site.",
   },
   {
     icon: Layers3,
@@ -106,36 +107,36 @@ const DECISIONS = [
   },
   {
     icon: Workflow,
-    title: "Small complete paths before broad coverage",
+    title: "Idempotent writes with transactional events",
     description:
-      "The implementation is divided into useful vertical increments: authenticate, authorize, query, and return one complete resource flow before expanding the platform.",
+      "State-changing operations use actor-scoped idempotency and database transactions, with audit and outbox records committed beside the domain change. Retries are safe and downstream work stays consistent.",
   },
 ];
 
 const STATUS = [
   {
     state: "complete",
-    title: "Application and database foundation",
+    title: "Backend foundation",
     description:
-      "NestJS application structure, PostgreSQL connectivity, migrations, liveness checks, and readiness checks.",
+      "NestJS structure, PostgreSQL/PostGIS integration, TypeORM migrations, configuration validation, health checks, request tracing, error handling, and OpenAPI contracts.",
   },
   {
     state: "complete",
-    title: "Role and access direction",
+    title: "Identity and authorization",
     description:
-      "Default role templates, configurable permissions, administrative responsibility, and site-scoped authorization rules.",
+      "Scoped permissions, active role assignments, Organization → Project → Site containment, individual permission exceptions, and authorized resource queries.",
   },
   {
-    state: "active",
-    title: "Schedule and activity capabilities",
+    state: "complete",
+    title: "Planning and field execution",
     description:
-      "Retrieval paths for activities belonging to authorized sites and active schedule versions.",
+      "Schedule import and validation, versions, activities and dependencies, schedule health, templates, schedule generation, progress, evidence, resource reporting, and hindrance reporting.",
   },
   {
-    state: "planned",
-    title: "Progress, attendance, and approvals",
+    state: "complete",
+    title: "Verification and reliability",
     description:
-      "Field submissions, supporting evidence, attendance and visit tracking, review, rejection, and approval flows.",
+      "Progress decisions, hindrance verification, idempotency, transactional outbox messages, audit events, notifications, structured logging, and extensive E2E coverage.",
   },
 ];
 
@@ -204,9 +205,9 @@ export default function IndustrialProjectManagementCaseStudy() {
                   text-foreground/65 sm:text-xl
                 "
               >
-                A mobile-first operational system for site
-                activity, project schedules, progress reporting,
-                attendance, review, approval, and management
+                Enterprise backend for coordinating industrial
+                project planning, field execution, progress
+                verification, resource reporting, and management
                 visibility.
               </p>
             </div>
@@ -241,7 +242,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                   Focus
                 </dt>
                 <dd className="text-sm leading-6 text-foreground/70">
-                  Architecture, data, authorization, APIs
+                  Domain architecture, authorization, transactional workflows, reliability
                 </dd>
               </div>
 
@@ -255,7 +256,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                   Stack
                 </dt>
                 <dd className="text-sm leading-6 text-foreground/70">
-                  NestJS, PostgreSQL, TypeORM, REST
+                  NestJS, TypeScript, PostgreSQL, PostGIS, TypeORM, REST, OpenAPI
                 </dd>
               </div>
 
@@ -305,7 +306,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                   sm:text-4xl
                 "
               >
-                The difficult part was not creating another dashboard.
+                Project-management data is useful only when the system can establish who may change it—and which version of the truth is trusted.
               </h2>
 
               <div
@@ -316,21 +317,11 @@ export default function IndustrialProjectManagementCaseStudy() {
                 "
               >
                 <p>
-                  The platform has to represent how work actually
-                  moves through an industrial project: scheduled
-                  activities are performed at sites, field progress
-                  is submitted with evidence, supervisors review the
-                  submission, and approved information becomes part
-                  of the project record.
+                  The platform models the operational lifecycle of an industrial project: projects contain sites, schedules define activities, field teams report execution, supervisors verify progress and hindrances, and approved information becomes part of the trusted project record.
                 </p>
 
                 <p>
-                  Requirements arrived through documents, spreadsheet
-                  schedules, team interpretations, and conversations.
-                  Some rules were incomplete or contradictory. The
-                  engineering work therefore included determining
-                  what the system should mean before deciding how it
-                  should be implemented.
+                  The backend coordinates planning, field execution, verification, access control, and reliability—not just CRUD APIs. Requirements arrived through operational documents, spreadsheets, discussions, and evolving interpretations, so the work included translating business rules into enforceable domain invariants.
                 </p>
               </div>
             </div>
@@ -471,7 +462,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                   tracking-[0.2em] text-foreground/40
                 "
               >
-                03 · Request flow
+                03 · Authorization
               </p>
             </div>
 
@@ -483,7 +474,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                   sm:text-4xl
                 "
               >
-                Activity retrieval is also an authorization problem.
+                Authorization is evaluated against the resource’s real scope, not identifiers supplied by the client.
               </h2>
 
               <p
@@ -492,11 +483,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                   text-foreground/60 sm:text-lg
                 "
               >
-                Returning a list of activities requires more than a
-                database query. The system must establish identity,
-                understand site hierarchy, evaluate scoped access,
-                and select the current schedule before data can be
-                returned safely.
+                A request does not simply ask, “Does this user have this role?” The backend resolves account and identity state, active role assignments, scope containment, role permissions, and individual exceptions before it permits an operation.
               </p>
 
               <ol
@@ -560,7 +547,11 @@ export default function IndustrialProjectManagementCaseStudy() {
               tracking-[0.2em] text-background/40
             "
           >
-            Authorization path
+            Reliable write workflow
+          </p>
+
+          <p className="mt-4 max-w-3xl text-base leading-7 text-background/65 sm:text-lg">
+            State-changing APIs remain correct when clients retry requests, calls fail, or operations interact concurrently. Domain state, audit records, and downstream events are committed together in one transaction.
           </p>
 
           <div
@@ -570,11 +561,11 @@ export default function IndustrialProjectManagementCaseStudy() {
             "
           >
             {[
-              "Authenticate",
-              "Resolve ancestry",
-              "Evaluate scope",
-              "Select active schedule",
-              "Return activities",
+              "Resolve actor + scope",
+              "Evaluate permission",
+              "Validate + idempotency",
+              "Commit domain, audit + outbox",
+              "Return stable result",
             ].map((item, index) => (
               <div
                 key={item}
@@ -618,7 +609,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                   tracking-[0.2em] text-foreground/40
                 "
               >
-                04 · Decisions
+                04 · Engineering decisions
               </p>
             </div>
 
@@ -677,6 +668,46 @@ export default function IndustrialProjectManagementCaseStudy() {
         </div>
       </section>
 
+      <section className="border-y border-foreground/10 bg-foreground/5 px-4 py-20 sm:px-6 sm:py-24 lg:px-12">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-10 lg:grid-cols-[minmax(220px,0.4fr)_minmax(0,1fr)] lg:gap-20">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">
+                05 · Planning &amp; verification
+              </p>
+            </div>
+
+            <div>
+              <h2 className="max-w-3xl text-3xl font-semibold leading-tight tracking-[-0.04em] sm:text-4xl">
+                Project schedules are versioned data; field reports become trusted only through verification.
+              </h2>
+
+              <div className="mt-9 grid gap-8 sm:grid-cols-2">
+                <article className="border-t border-foreground/15 pt-5">
+                  <h3 className="text-xl font-semibold tracking-[-0.025em]">Planning and scheduling</h3>
+                  <p className="mt-3 text-sm leading-7 text-foreground/60 sm:text-base">
+                    Excel-based imports, workbook validation, schedule versions and activation, activities, dependencies, health calculations, reusable templates, parameterized generation, and resource requirements keep current plans distinct from superseded ones.
+                  </p>
+                </article>
+                <article className="border-t border-foreground/15 pt-5">
+                  <h3 className="text-xl font-semibold tracking-[-0.025em]">Field execution and review</h3>
+                  <p className="mt-3 text-sm leading-7 text-foreground/60 sm:text-base">
+                    Progress submissions with evidence enter a review queue before approval, adjustment, return, or rejection. Hindrances are independently verified, while manpower, material, and equipment are reported as operational resources.
+                  </p>
+                </article>
+              </div>
+
+              <div className="mt-9 border border-foreground/10 bg-background p-5 sm:p-6">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-foreground/40">Trusted project state</p>
+                <p className="mt-4 font-medium leading-7 text-foreground/80">
+                  Activity → Progress submission → Supporting evidence → Review queue → Approve / Adjust / Return / Reject → Trusted activity actual
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section
         className="
           border-y border-foreground/10
@@ -701,7 +732,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                   tracking-[0.2em] text-foreground/40
                 "
               >
-                05 · Current state
+                06 · Current state
               </p>
             </div>
 
@@ -713,7 +744,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                   sm:text-4xl
                 "
               >
-                Presented as work in progress, not as a finished product.
+                A substantial backend foundation, still evolving with the product.
               </h2>
 
               <div className="mt-10 space-y-3">
@@ -780,7 +811,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                   tracking-[0.2em] text-foreground/40
                 "
               >
-                06 · Reflection
+                07 · Security &amp; testing
               </p>
             </div>
 
@@ -792,7 +823,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                   sm:text-4xl
                 "
               >
-                The domain model begins before the database schema.
+                Fail safely at the boundary, then prove the behaviour through real application paths.
               </h2>
 
               <div
@@ -803,19 +834,22 @@ export default function IndustrialProjectManagementCaseStudy() {
                 "
               >
                 <p>
-                  The main lesson has been that backend architecture
-                  cannot compensate for unclear product meaning.
-                  Roles, sites, schedules, activities, submissions,
-                  attendance, and approvals first need defensible
-                  definitions.
+                  Security is built into the operational paths: canonical scope is resolved by the backend, authorization-derived predicates prevent unrestricted reads, and unauthorized evidence retrieval conceals whether the resource exists. Upload validation checks file signatures as well as declared MIME types, while request and upload sizes are constrained.
                 </p>
 
                 <p>
-                  The second lesson is implementation discipline.
-                  A complete, authorized activity-retrieval path
-                  creates more value and reveals more architectural
-                  truth than partially constructing every module at
-                  once.
+                  The E2E suite runs against an isolated PostgreSQL database with real migrations and data resets. It covers IAM, project and site operations, schedule imports and health, progress and evidence, hindrances, resources, audit and notifications, idempotency, and transactional outbox behaviour.
+                </p>
+
+                <p>
+                  The test harness protects non-test databases from accidental cleanup—an intentionally small safeguard with outsized value when tests operate against real infrastructure.
+                </p>
+              </div>
+
+              <div className="mt-10 border-t border-foreground/15 pt-7">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-foreground/40">What this project taught me</p>
+                <p className="mt-4 max-w-3xl text-base leading-8 text-foreground/65 sm:text-lg">
+                  Backend engineering for operational software is primarily about preserving invariants across boundaries: who may change state, at what scope, which data is authoritative, what survives retries and concurrent actions, and what must remain auditable.
                 </p>
               </div>
 
