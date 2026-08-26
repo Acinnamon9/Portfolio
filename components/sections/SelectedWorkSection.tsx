@@ -12,10 +12,11 @@ const PROJECTS = [
     context:
       "A system for HPCL-Mittal Energy Limited (HMEL) coordinating project planning, field execution, verification, and management visibility.",
     contribution:
-      "Backend foundation, domain modelling, authorization design, API contracts, migrations, and activity-retrieval implementation.",
+      "Designed backend boundaries, Organization → Project → Site authorization, transactional field workflows, audit/outbox reliability, API contracts, and migrations.",
     decision:
       "Modelled access around site hierarchy and permission scope instead of hard-coding behaviour directly to role labels.",
     status: "Active development",
+    presentation: "standard",
     stack: [
       "NestJS",
       "PostgreSQL",
@@ -32,10 +33,11 @@ const PROJECTS = [
     context:
       "A recruitment system connecting requisitions, candidates, AI screening, recruiter workspaces, interviews, communications, and decisions.",
     contribution:
-      "Worked across recruiter and manager workflows, communication delivery, permissions, dashboards, email integration, and production debugging.",
+      "Modelled connected recruitment workflows and worked on AI screening attempts, callback/retry paths, idempotent webhooks, resume processing, provider integrations, and production debugging.",
     decision:
       "Treated recruitment as an end-to-end workflow system rather than a collection of independent dashboards.",
     status: "Implemented in stages",
+    presentation: "standard",
     stack: [
       "Next.js",
       "TypeScript",
@@ -55,7 +57,8 @@ const PROJECTS = [
       "Worked on product modelling, frontend experiences, provider integrations, appointment flows, email delivery, and product positioning.",
     decision:
       "Focused the product around business outcomes after the call, not only the voice interaction itself.",
-    status: "Ongoing product work",
+    status: "Currently building",
+    presentation: "building",
     stack: [
       "Next.js",
       "Webhooks",
@@ -76,6 +79,7 @@ const PROJECTS = [
     decision:
       "Separated AI intent from browser execution: the model requests typed actions, while a deterministic client-side bridge validates and performs them, then reports the real outcome back to the agent.",
     status: "Working prototype",
+    presentation: "standard",
     stack: [
       "Next.js 16",
       "React 19",
@@ -164,12 +168,12 @@ export default function SelectedWorkSection() {
                 duration: 0.45,
                 delay: index * 0.05,
               }}
-              className="
+              className={`
                 grid gap-8 border-b
-                border-foreground/15 py-12
+                border-foreground/15 py-10
                 lg:grid-cols-[4rem_minmax(0,1.1fr)_minmax(300px,0.9fr)]
-                lg:gap-10 lg:py-16
-              "
+                lg:gap-10 ${project.presentation === "building" ? "lg:py-10" : "lg:py-16"}
+              `}
             >
               <div
                 className="

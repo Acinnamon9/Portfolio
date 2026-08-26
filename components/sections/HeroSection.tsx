@@ -8,10 +8,8 @@ import {
 } from "lucide-react";
 
 const CURRENT_FOCUS = [
-  "Backend architecture with NestJS and PostgreSQL",
-  "Site-scoped authorization and hierarchy-aware access",
-  "Schedule, activity, progress, and approval workflows",
-  "Translating incomplete requirements into implementable systems",
+  "HMEL industrial project platform — NestJS + PostgreSQL",
+  "Scoped authorization, scheduling, and field-verification workflows",
 ];
 
 export default function HeroSection() {
@@ -180,14 +178,14 @@ export default function HeroSection() {
           }}
           className="
             border border-foreground/15
-            bg-foreground/5 p-6
-            sm:p-8
+            bg-foreground/5 p-5
+            sm:p-6
           "
         >
           <div
             className="
-              mb-7 flex items-center justify-between
-              gap-4 border-b border-foreground/15 pb-5
+              mb-5 flex items-center justify-between
+              gap-4 border-b border-foreground/15 pb-4
             "
           >
             <div>
@@ -202,7 +200,7 @@ export default function HeroSection() {
 
               <h2
                 className="
-                  mt-2 text-2xl font-semibold
+                  mt-2 text-xl font-semibold
                   tracking-[-0.035em] text-foreground
                 "
               >
@@ -221,7 +219,7 @@ export default function HeroSection() {
             </span>
           </div>
 
-          <ul className="space-y-4">
+          <ul className="space-y-3">
             {CURRENT_FOCUS.map((item, index) => (
               <li
                 key={item}
