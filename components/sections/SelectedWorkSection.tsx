@@ -7,10 +7,10 @@ import Link from "next/link";
 const PROJECTS = [
   {
     number: "01",
-    title: "Industrial project-management platform",
+    title: "HMEL industrial project-management platform",
     category: "Backend architecture and operational workflows",
     context:
-      "A mobile-first system for coordinating site activity, progress reporting, approvals, attendance, schedules, and project visibility.",
+      "A system for HPCL-Mittal Energy Limited (HMEL) coordinating project planning, field execution, verification, and management visibility.",
     contribution:
       "Backend foundation, domain modelling, authorization design, API contracts, migrations, and activity-retrieval implementation.",
     decision:

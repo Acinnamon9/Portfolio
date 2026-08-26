@@ -15,9 +15,9 @@ import Navbar from "../../../components/Navbar";
 
 export const metadata: Metadata = {
   title:
-    "Industrial Project-Management Platform | Abhijeet Singh",
+    "HMEL Industrial Project-Management Platform | Abhijeet Singh",
   description:
-    "A case study covering industrial planning, field execution, scoped authorization, transactional workflows, and backend reliability.",
+    "A case study of the HMEL industrial project-management platform, covering planning, field execution, scoped authorization, and backend reliability.",
 };
 
 const PLATFORM_AREAS = [
@@ -196,7 +196,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                   tracking-[-0.055em]
                 "
               >
-                Industrial project-management platform
+                HMEL industrial project-management platform
               </h1>
 
               <p
@@ -270,7 +270,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                   Context
                 </dt>
                 <dd className="text-sm leading-6 text-foreground/70">
-                  Internal and client-facing product
+                  HPCL-Mittal Energy Limited (HMEL)
                 </dd>
               </div>
             </dl>
@@ -317,7 +317,7 @@ export default function IndustrialProjectManagementCaseStudy() {
                 "
               >
                 <p>
-                  The platform models the operational lifecycle of an industrial project: projects contain sites, schedules define activities, field teams report execution, supervisors verify progress and hindrances, and approved information becomes part of the trusted project record.
+                  Built for HPCL-Mittal Energy Limited (HMEL), the platform models the operational lifecycle of an industrial project: projects contain sites, schedules define activities, field teams report execution, supervisors verify progress and hindrances, and approved information becomes part of the trusted project record.
                 </p>
 
                 <p>
