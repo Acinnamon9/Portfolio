@@ -143,7 +143,7 @@ export default function Navbar() {
           ))}
 
           <a
-            href="/Abhijeet_Resume.pdf"
+            href="/documents/abhijeet-resume.pdf"
             download
             className="
               inline-flex items-center gap-2
@@ -295,7 +295,7 @@ export default function Navbar() {
               ))}
 
               <a
-                href="/Abhijeet_Resume.pdf"
+                href="/documents/abhijeet-resume.pdf"
                 download
                 onClick={closeMenu}
                 className="

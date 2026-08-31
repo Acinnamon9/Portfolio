@@ -114,7 +114,7 @@ export default function HeroSection() {
             </a>
 
             <a
-              href="/Abhijeet_Resume.pdf"
+              href="/documents/abhijeet-resume.pdf"
               download
               className="
                 inline-flex min-h-12 items-center

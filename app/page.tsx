@@ -87,7 +87,7 @@ export default function Home() {
             </a>
 
             <a
-              href="/Abhijeet_Resume.pdf"
+              href="/documents/abhijeet-resume.pdf"
               download
               className="
                 flex min-h-14 items-center justify-between

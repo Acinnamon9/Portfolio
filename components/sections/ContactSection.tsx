@@ -41,7 +41,7 @@ export default function ContactSection() {
               className="bg-brand-primary text-foreground hover:bg-brand-secondary h-20 px-12 text-2xl md:text-3xl font-black border-4 shadow-[8px_8px_0px_0px_#fff]"
               asChild
             >
-              <a href="/Abhijeet_Resume.pdf" download>
+              <a href="/documents/abhijeet-resume.pdf" download>
                 <FileDown size={32} className="mr-4" />
                 RESUME
               </a>

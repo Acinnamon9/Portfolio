@@ -2,7 +2,7 @@
 
 ## 🔴 Must Do (Before Sharing With Anyone)
 
-- [ ] **Replace resume** — Swap `/public/Abhijeet_Resume.pdf` placeholder with your actual PDF
+- [x] **Replace resume** — Resume is available at `/public/documents/abhijeet-resume.pdf`
 - [ ] **Add OG share image** — Create a 1200×630px branded image and save as `/public/og-image.png`. This is what shows when your link is shared on LinkedIn/Slack/Twitter
 - [ ] **Fill in company name** — Search `"COMPANY NAME"` in `lib/constants.tsx` and replace with your actual internship company
 - [ ] **Fill in university names** — Search `"UNIVERSITY NAME"` in `lib/constants.tsx` and replace with your actual institutions
@@ -32,6 +32,6 @@
 | OG tags & metadata | `app/layout.tsx` |
 | Navbar (resume/LinkedIn) | `components/Navbar.tsx` |
 | Contact section | `components/sections/ContactSection.tsx` |
-| Resume PDF | `public/Abhijeet_Resume.pdf` |
+| Resume PDF | `public/documents/abhijeet-resume.pdf` |
 | Favicon | `public/favicon.svg` |
 | Feature roadmap | Portfolio roadmap artifact |
