@@ -8,6 +8,7 @@ import {
 import Navbar from "../components/Navbar";
 import HeroSection from "../components/sections/HeroSection";
 import SelectedWorkSection from "../components/sections/SelectedWorkSection";
+import ProductExperiencesSection from "../components/sections/ProductExperiencesSection";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <SelectedWorkSection />
+      <ProductExperiencesSection />
 
       <section
         id="contact"

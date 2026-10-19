@@ -59,6 +59,22 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: auto;
+  scrollbar-color: auto;
+}
+
+html::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: var(--foreground);
+  border-radius: 999px;
 }
 
 body {
