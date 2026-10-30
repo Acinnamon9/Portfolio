@@ -46,16 +46,6 @@ export default function HeroSection() {
           }}
           className="min-w-0"
         >
-          <p
-            className="
-              mb-5 text-xs font-semibold uppercase
-              tracking-[0.2em] text-foreground/45
-              sm:text-sm
-            "
-          >
-            Product-focused software engineer
-          </p>
-
           <h1
             className="
               max-w-4xl

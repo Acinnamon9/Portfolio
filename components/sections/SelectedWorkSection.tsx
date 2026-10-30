@@ -3,11 +3,13 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const PROJECTS = [
   {
     number: "01",
     title: "HMEL industrial project-management platform",
+    image: "/images/hmel/HMEL.png",
     category: "Backend architecture and operational workflows",
     context:
       "A system for HPCL-Mittal Energy Limited (HMEL) coordinating project planning, field execution, verification, and management visibility.",
@@ -213,6 +215,18 @@ export default function SelectedWorkSection() {
                 >
                   {project.context}
                 </p>
+
+                {"image" in project && (
+                  <div className="mt-7 max-w-xl overflow-hidden border border-foreground/10">
+                    <Image
+                      src={project.image}
+                      alt="HMEL construction operations management platform showcase."
+                      width={1122}
+                      height={1402}
+                      className="h-auto w-full"
+                    />
+                  </div>
+                )}
 
                 <div className="mt-7 flex flex-wrap gap-2">
                   {project.stack.map((technology) => (
