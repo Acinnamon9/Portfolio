@@ -16,6 +16,7 @@ export default function HeroSection() {
   return (
     <section
       className="
+        snap-center
         border-b border-foreground/10
         bg-background px-4 sm:px-6 lg:px-12
       "

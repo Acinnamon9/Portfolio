@@ -31,6 +31,8 @@ export const blogPosts = pgTable(
     description: text("description")
       .notNull(),
 
+    coverImageUrl: text("cover_image_url"),
+
     contentMarkdown: text("content_markdown")
       .notNull(),
 
@@ -91,6 +93,8 @@ export const blogPostRevisions = pgTable(
 
     description: text("description")
       .notNull(),
+
+    coverImageUrl: text("cover_image_url"),
 
     contentMarkdown: text("content_markdown")
       .notNull(),

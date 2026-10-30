@@ -82,6 +82,7 @@ export async function createBlogDraft(
         title: validated.title,
         slug: validated.slug,
         description: validated.description,
+        coverImageUrl: validated.coverImageUrl,
         contentMarkdown: validated.contentMarkdown,
         status: "draft",
       })
@@ -182,6 +183,23 @@ export async function listPublishedBlogPosts(): Promise<
 }
 
 /**
+ * Lists the three newest published articles for the homepage.
+ */
+export async function listLatestPublishedBlogPosts(): Promise<
+  BlogPost[]
+> {
+  return db
+    .select()
+    .from(blogPosts)
+    .where(eq(blogPosts.status, "published"))
+    .orderBy(
+      desc(blogPosts.publishedAt),
+      desc(blogPosts.updatedAt),
+    )
+    .limit(3);
+}
+
+/**
  * Retrieves a public article by slug.
  *
  * Draft and archived posts deliberately behave as "not found" so
@@ -279,6 +297,7 @@ export async function updateBlogDraft(
           revisionNumber: nextRevisionNumber,
           title: existingPost.title,
           description: existingPost.description,
+          coverImageUrl: existingPost.coverImageUrl,
           contentMarkdown:
             existingPost.contentMarkdown,
           changeSummary: validated.changeSummary,
@@ -298,6 +317,11 @@ export async function updateBlogDraft(
           description:
             validated.description ??
             existingPost.description,
+
+          coverImageUrl:
+            validated.coverImageUrl !== undefined
+              ? validated.coverImageUrl
+              : existingPost.coverImageUrl,
 
           contentMarkdown:
             validated.contentMarkdown ??

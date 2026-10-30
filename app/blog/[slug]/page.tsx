@@ -7,6 +7,7 @@ import type {
 } from "next";
 
 import Link from "next/link";
+import Image from "next/image";
 
 import {
   notFound,
@@ -112,6 +113,10 @@ export async function generateMetadata({
       authors: [
         "Abhijeet Singh",
       ],
+
+      images: post.coverImageUrl
+        ? [post.coverImageUrl]
+        : undefined,
     },
 
     twitter: {
@@ -123,6 +128,10 @@ export async function generateMetadata({
 
       description:
         post.description,
+
+      images: post.coverImageUrl
+        ? [post.coverImageUrl]
+        : undefined,
     },
   };
 }
@@ -286,6 +295,20 @@ export default async function BlogPostPage({
                 </>
               )}
             </div>
+
+            {post.coverImageUrl && (
+              <div className="relative mt-10 aspect-[16/9] max-w-5xl overflow-hidden border border-foreground/10 bg-foreground/[0.03]">
+                <Image
+                  src={post.coverImageUrl}
+                  alt={`Cover image for ${post.title}`}
+                  fill
+                  unoptimized
+                  sizes="(max-width: 1024px) 100vw, 1024px"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            )}
           </header>
 
           <div

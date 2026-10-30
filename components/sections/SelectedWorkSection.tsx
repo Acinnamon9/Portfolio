@@ -1,7 +1,8 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Maximize2, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -9,7 +10,11 @@ const PROJECTS = [
   {
     number: "01",
     title: "HMEL industrial project-management platform",
+    companyHref: "https://en.wikipedia.org/wiki/HPCL-Mittal_Energy_Limited",
     image: "/images/hmel/HMEL.png",
+    imageAlt: "HMEL construction operations management platform showcase.",
+    imageWidth: 1122,
+    imageHeight: 1402,
     category: "Backend architecture and operational workflows",
     context:
       "A system for HPCL-Mittal Energy Limited (HMEL) coordinating project planning, field execution, verification, and management visibility.",
@@ -17,7 +22,7 @@ const PROJECTS = [
       "Designed backend boundaries, Organization → Project → Site authorization, transactional field workflows, audit/outbox reliability, API contracts, and migrations.",
     decision:
       "Modelled access around site hierarchy and permission scope instead of hard-coding behaviour directly to role labels.",
-    status: "Active development",
+    status: "Complete",
     presentation: "standard",
     stack: [
       "NestJS",
@@ -31,6 +36,11 @@ const PROJECTS = [
   {
     number: "02",
     title: "AI recruitment platform",
+    image: "/images/hiring/Hiring.png",
+    imageAlt: "TalentStream AI hiring platform dashboard and workflow showcase.",
+    imageWidth: 1536,
+    imageHeight: 1024,
+    liveHref: "https://talentstream.ravan.ai",
     category: "Multi-role product and integration work",
     context:
       "A recruitment system connecting requisitions, candidates, AI screening, recruiter workspaces, interviews, communications, and decisions.",
@@ -38,7 +48,7 @@ const PROJECTS = [
       "Modelled connected recruitment workflows and worked on AI screening attempts, callback/retry paths, idempotent webhooks, resume processing, provider integrations, and production debugging.",
     decision:
       "Treated recruitment as an end-to-end workflow system rather than a collection of independent dashboards.",
-    status: "Implemented in stages",
+    status: "Complete",
     presentation: "standard",
     stack: [
       "Next.js",
@@ -93,6 +103,81 @@ const PROJECTS = [
   },
 ];
 
+function ExpandableProjectImage({
+  src,
+  alt,
+  width,
+  height,
+}: {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    if (isOpen && !dialogRef.current?.open) {
+      dialogRef.current?.showModal();
+    }
+  }, [isOpen]);
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => setIsOpen(true)}
+        aria-label={`Expand image: ${alt}`}
+        className="group relative block w-full cursor-zoom-in text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+      >
+        <Image
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          className="h-auto w-full"
+        />
+        <span className="absolute bottom-3 right-3 inline-flex translate-y-2 items-center gap-2 bg-foreground px-3 py-2 text-xs font-medium text-background opacity-0 transition-[opacity,transform] duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none [@media(hover:none)]:translate-y-0 [@media(hover:none)]:opacity-100">
+          <Maximize2 size={14} aria-hidden="true" />
+          Expand image
+        </span>
+      </button>
+
+      <dialog
+        ref={dialogRef}
+        onClose={() => setIsOpen(false)}
+        onClick={(event) => {
+          if (event.target === dialogRef.current) {
+            dialogRef.current?.close();
+          }
+        }}
+        aria-label="Expanded project image"
+        className="m-auto max-h-[94dvh] max-w-[96vw] overflow-visible border-0 bg-transparent p-0 backdrop:bg-black/80"
+      >
+        <div className="relative rounded-lg bg-background p-2 shadow-2xl sm:p-3">
+          <button
+            type="button"
+            onClick={() => dialogRef.current?.close()}
+            aria-label="Close expanded image"
+            className="absolute right-3 top-3 z-10 inline-flex size-10 items-center justify-center rounded-full bg-foreground text-background transition-opacity hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
+          >
+            <X size={20} aria-hidden="true" />
+          </button>
+          <Image
+            src={src}
+            alt={alt}
+            width={width}
+            height={height}
+            className="max-h-[88dvh] w-auto max-w-[92vw] object-contain"
+            priority
+          />
+        </div>
+      </dialog>
+    </>
+  );
+}
+
 export default function SelectedWorkSection() {
   return (
     <section
@@ -112,15 +197,6 @@ export default function SelectedWorkSection() {
           "
         >
           <div>
-            <p
-              className="
-                text-xs font-semibold uppercase
-                tracking-[0.2em] text-foreground/40
-              "
-            >
-              Selected work
-            </p>
-
             <h2
               className="
                 mt-4 max-w-xl text-4xl font-semibold
@@ -171,7 +247,7 @@ export default function SelectedWorkSection() {
                 delay: index * 0.05,
               }}
               className={`
-                grid gap-8 border-b
+                snap-center grid gap-8 border-b
                 border-foreground/15 py-10
                 lg:grid-cols-[4rem_minmax(0,1.1fr)_minmax(300px,0.9fr)]
                 lg:gap-10 ${project.presentation === "building" ? "lg:py-10" : "lg:py-16"}
@@ -204,7 +280,21 @@ export default function SelectedWorkSection() {
                     sm:text-4xl
                   "
                 >
-                  {project.title}
+                  {"companyHref" in project ? (
+                    <>
+                      <a
+                        href={project.companyHref}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="underline decoration-foreground/30 underline-offset-4 hover:decoration-foreground"
+                      >
+                        HMEL
+                      </a>
+                      {project.title.slice("HMEL".length)}
+                    </>
+                  ) : (
+                    project.title
+                  )}
                 </h3>
 
                 <p
@@ -216,14 +306,16 @@ export default function SelectedWorkSection() {
                   {project.context}
                 </p>
 
-                {"image" in project && (
+                {"image" in project &&
+                  "imageAlt" in project &&
+                  "imageWidth" in project &&
+                  "imageHeight" in project && (
                   <div className="mt-7 max-w-xl overflow-hidden border border-foreground/10">
-                    <Image
+                    <ExpandableProjectImage
                       src={project.image}
-                      alt="HMEL construction operations management platform showcase."
-                      width={1122}
-                      height={1402}
-                      className="h-auto w-full"
+                      alt={project.imageAlt}
+                      width={project.imageWidth}
+                      height={project.imageHeight}
                     />
                   </div>
                 )}
@@ -243,91 +335,129 @@ export default function SelectedWorkSection() {
                   ))}
                 </div>
 
-                {project.href ? (
-                  <Link
-                    href={project.href}
-                    className="
-                      mt-8 inline-flex items-center gap-2
-                      border-b border-foreground pb-1
-                      text-sm font-semibold text-foreground
-                      transition-opacity hover:opacity-60
-                    "
-                  >
-                    Read case study
-                    <ArrowUpRight
-                      size={17}
-                      strokeWidth={1.8}
-                      aria-hidden="true"
-                    />
-                  </Link>
-                ) : (
-                  <p
-                    className="
-                      mt-8 text-xs font-medium uppercase
-                      tracking-[0.14em] text-foreground/30
-                    "
-                  >
-                    Detailed case study coming later
-                  </p>
-                )}
               </div>
 
-              <dl className="space-y-6">
-                <div>
-                  <dt
-                    className="
-                      text-xs font-semibold uppercase
-                      tracking-[0.16em] text-foreground/35
-                    "
-                  >
-                    My contribution
-                  </dt>
+              <div className="flex h-full flex-col">
+                <dl className="space-y-6">
+                  <div>
+                    <dt
+                      className="
+                        text-xs font-semibold uppercase
+                        tracking-[0.16em] text-foreground/35
+                      "
+                    >
+                      My contribution
+                    </dt>
 
-                  <dd
-                    className="
-                      mt-2 text-sm leading-6
-                      text-foreground/65 sm:text-base
-                    "
-                  >
-                    {project.contribution}
-                  </dd>
+                    <dd
+                      className="
+                        mt-2 text-sm leading-6
+                        text-foreground/65 sm:text-base
+                      "
+                    >
+                      {project.contribution}
+                    </dd>
+                  </div>
+
+                  <div>
+                    <dt
+                      className="
+                        text-xs font-semibold uppercase
+                        tracking-[0.16em] text-foreground/35
+                      "
+                    >
+                      Important decision
+                    </dt>
+
+                    <dd
+                      className="
+                        mt-2 text-sm leading-6
+                        text-foreground/65 sm:text-base
+                      "
+                    >
+                      {project.decision}
+                    </dd>
+                  </div>
+
+                  <div>
+                    <dt
+                      className="
+                        text-xs font-semibold uppercase
+                        tracking-[0.16em] text-foreground/35
+                      "
+                    >
+                      Status
+                    </dt>
+
+                    <dd className="mt-2 text-sm font-medium text-foreground">
+                      {"liveHref" in project ? (
+                        <a
+                          href={project.liveHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline decoration-foreground/30 underline-offset-4 transition-colors hover:decoration-foreground"
+                        >
+                          {project.status}
+                        </a>
+                      ) : (
+                        project.status
+                      )}
+                    </dd>
+                  </div>
+                </dl>
+
+                <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-8">
+                  {project.href ? (
+                    <Link
+                      href={project.href}
+                      className="
+                        inline-flex items-center gap-2
+                        border-b border-foreground pb-1
+                        text-sm font-semibold text-foreground
+                        transition-opacity hover:opacity-60
+                      "
+                    >
+                      Read case study
+                      <ArrowUpRight
+                        size={17}
+                        strokeWidth={1.8}
+                        aria-hidden="true"
+                      />
+                    </Link>
+                  ) : (
+                    <p
+                      className="
+                        text-xs font-medium uppercase
+                        tracking-[0.14em] text-foreground/30
+                      "
+                    >
+                      Detailed case study coming later
+                    </p>
+                  )}
+
+                  {"liveHref" in project && (
+                    <a
+                      href={project.liveHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="
+                        inline-flex items-center gap-2
+                        border-b border-foreground/40 pb-1
+                        text-sm font-semibold text-foreground/70
+                        transition-colors hover:border-foreground
+                        hover:text-foreground
+                      "
+                    >
+                      Visit TalentStream
+                      <ArrowUpRight
+                        size={17}
+                        strokeWidth={1.8}
+                        aria-hidden="true"
+                      />
+                    </a>
+                  )}
                 </div>
-
-                <div>
-                  <dt
-                    className="
-                      text-xs font-semibold uppercase
-                      tracking-[0.16em] text-foreground/35
-                    "
-                  >
-                    Important decision
-                  </dt>
-
-                  <dd
-                    className="
-                      mt-2 text-sm leading-6
-                      text-foreground/65 sm:text-base
-                    "
-                  >
-                    {project.decision}
-                  </dd>
-                </div>
-
-                <div>
-                  <dt
-                    className="
-                      text-xs font-semibold uppercase
-                      tracking-[0.16em] text-foreground/35
-                    "
-                  >
-                    Status
-                  </dt>
-
-                  <dd className="mt-2 text-sm font-medium text-foreground">
-                    {project.status}
-                  </dd>
-                </div>
-              </dl>
+              </div>
             </motion.article>
           ))}
         </div>

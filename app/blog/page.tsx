@@ -3,6 +3,7 @@ import type {
 } from "next";
 
 import Link from "next/link";
+import Image from "next/image";
 
 import {
   ArrowUpRight,
@@ -286,6 +287,19 @@ export default async function BlogPage() {
                         >
                           {post.description}
                         </p>
+
+                        {post.coverImageUrl && (
+                          <div className="relative mt-5 aspect-[16/9] max-w-xl overflow-hidden border border-foreground/10 bg-foreground/[0.03]">
+                            <Image
+                              src={post.coverImageUrl}
+                              alt={`Cover image for ${post.title}`}
+                              fill
+                              unoptimized
+                              sizes="(max-width: 672px) 100vw, 576px"
+                              className="object-cover"
+                            />
+                          </div>
+                        )}
                       </div>
 
                       <Link

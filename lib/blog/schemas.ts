@@ -22,6 +22,16 @@ const blogDescriptionSchema = z
   .min(20, "Description must contain at least 20 characters.")
   .max(320, "Description must not exceed 320 characters.");
 
+const blogCoverImageUrlSchema = z
+  .string()
+  .trim()
+  .max(2048, "Cover image URL must not exceed 2048 characters.")
+  .url("Cover image must be a valid http or https URL.")
+  .refine((value) => /^https?:\/\//i.test(value), {
+    message: "Cover image URL must use http or https.",
+  })
+  .nullable();
+
 const blogContentMarkdownSchema = z
   .string()
   .trim()
@@ -31,6 +41,7 @@ export const createBlogDraftSchema = z.object({
   title: blogTitleSchema,
   slug: blogSlugSchema,
   description: blogDescriptionSchema,
+  coverImageUrl: blogCoverImageUrlSchema.optional().default(null),
   contentMarkdown: blogContentMarkdownSchema,
 });
 
@@ -39,6 +50,7 @@ export const updateBlogDraftSchema = z
     title: blogTitleSchema.optional(),
     slug: blogSlugSchema.optional(),
     description: blogDescriptionSchema.optional(),
+    coverImageUrl: blogCoverImageUrlSchema.optional(),
     contentMarkdown: blogContentMarkdownSchema.optional(),
 
     changeSummary: z
@@ -52,6 +64,7 @@ export const updateBlogDraftSchema = z
       input.title !== undefined ||
       input.slug !== undefined ||
       input.description !== undefined ||
+      input.coverImageUrl !== undefined ||
       input.contentMarkdown !== undefined,
     {
       message: "At least one blog post field must be updated.",

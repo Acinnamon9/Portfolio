@@ -4,6 +4,10 @@ import {
 
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
+import {
+  hasValidBlogEditorSession,
+  isSameOriginRequest,
+} from "./editor-session";
 
 import {
   BlogPostAlreadyPublishedError,
@@ -74,63 +78,75 @@ function secretsMatch(
 }
 
 /**
- * Validates the private bearer token used by Custom GPT Actions.
+ * Validates either a private Bearer token or the same-origin website
+ * editor session. Cookie-authenticated writes are restricted to this
+ * site's origin.
  *
  * Returns a 401/500 response on failure and null on success.
  */
 export function requireBlogApiAuth(
   request: Request,
 ): NextResponse<ErrorBody> | null {
-  const expectedKey =
-    process.env.BLOG_API_KEY;
+  const authorization = request.headers.get("authorization");
 
-  if (!expectedKey) {
-    console.error(
-      "BLOG_API_KEY is not configured.",
-    );
+  if (authorization) {
+    const expectedKey = process.env.BLOG_API_KEY;
 
-    return jsonError(
-      500,
-      "BLOG_API_NOT_CONFIGURED",
-      "The blog API is not configured.",
-    );
+    if (!expectedKey) {
+      console.error("BLOG_API_KEY is not configured.");
+
+      return jsonError(
+        500,
+        "BLOG_API_NOT_CONFIGURED",
+        "The blog API is not configured.",
+      );
+    }
+
+    const [scheme, token, ...extra] = authorization.trim().split(/\s+/);
+
+    if (
+      scheme?.toLowerCase() !== "bearer" ||
+      !token ||
+      extra.length > 0
+    ) {
+      return jsonError(
+        401,
+        "INVALID_AUTHORIZATION_HEADER",
+        "Authorization must use the Bearer scheme.",
+      );
+    }
+
+    if (!secretsMatch(token, expectedKey)) {
+      return jsonError(
+        401,
+        "INVALID_API_KEY",
+        "The supplied API key is invalid.",
+      );
+    }
+
+    return null;
   }
 
-  const authorization =
-    request.headers.get("authorization");
+  if (hasValidBlogEditorSession(request)) {
+    if (
+      !["GET", "HEAD", "OPTIONS"].includes(request.method.toUpperCase()) &&
+      !isSameOriginRequest(request)
+    ) {
+      return jsonError(
+        403,
+        "CROSS_ORIGIN_REQUEST",
+        "The blog editor accepts changes from this website only.",
+      );
+    }
 
-  if (!authorization) {
-    return jsonError(
-      401,
-      "UNAUTHENTICATED",
-      "Authorization header is required.",
-    );
+    return null;
   }
 
-  const [scheme, token, ...extra] =
-    authorization.trim().split(/\s+/);
-
-  if (
-    scheme?.toLowerCase() !== "bearer" ||
-    !token ||
-    extra.length > 0
-  ) {
-    return jsonError(
-      401,
-      "INVALID_AUTHORIZATION_HEADER",
-      "Authorization must use the Bearer scheme.",
-    );
-  }
-
-  if (!secretsMatch(token, expectedKey)) {
-    return jsonError(
-      401,
-      "INVALID_API_KEY",
-      "The supplied API key is invalid.",
-    );
-  }
-
-  return null;
+  return jsonError(
+    401,
+    "UNAUTHENTICATED",
+    "A valid blog editor session or Bearer token is required.",
+  );
 }
 
 /**

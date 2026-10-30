@@ -631,6 +631,7 @@ export async function GET(
             "slug",
             "title",
             "description",
+            "coverImageUrl",
             "contentMarkdown",
             "status",
             "publishedAt",
@@ -657,6 +658,12 @@ export async function GET(
 
             description: {
               type: "string",
+            },
+
+            coverImageUrl: {
+              type: "string",
+              format: "uri",
+              nullable: true,
             },
 
             contentMarkdown: {
@@ -704,6 +711,7 @@ export async function GET(
             "revisionNumber",
             "title",
             "description",
+            "coverImageUrl",
             "contentMarkdown",
             "changeSummary",
             "createdAt",
@@ -731,6 +739,12 @@ export async function GET(
 
             description: {
               type: "string",
+            },
+
+            coverImageUrl: {
+              type: "string",
+              format: "uri",
+              nullable: true,
             },
 
             contentMarkdown: {
@@ -786,6 +800,13 @@ export async function GET(
               maxLength: 320,
             },
 
+            coverImageUrl: {
+              type: "string",
+              format: "uri",
+              nullable: true,
+              maxLength: 2048,
+            },
+
             contentMarkdown: {
               type: "string",
               minLength: 100,
@@ -826,6 +847,11 @@ export async function GET(
                 "contentMarkdown",
               ],
             },
+            {
+              required: [
+                "coverImageUrl",
+              ],
+            },
           ],
 
           properties: {
@@ -848,6 +874,13 @@ export async function GET(
               type: "string",
               minLength: 20,
               maxLength: 320,
+            },
+
+            coverImageUrl: {
+              type: "string",
+              format: "uri",
+              nullable: true,
+              maxLength: 2048,
             },
 
             contentMarkdown: {

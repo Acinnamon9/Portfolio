@@ -27,7 +27,7 @@ export default function ProductExperiencesSection() {
   return (
     <section
       id="product-experiences"
-      className="border-t border-foreground/10 bg-background px-4 py-20 sm:px-6 sm:py-24 lg:px-12 lg:py-28"
+      className="snap-center border-t border-foreground/10 bg-background px-4 py-20 sm:px-6 sm:py-24 lg:px-12 lg:py-28"
     >
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-8 border-b border-foreground/15 pb-10 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)]">

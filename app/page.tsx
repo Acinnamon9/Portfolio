@@ -9,18 +9,29 @@ import Navbar from "../components/Navbar";
 import HeroSection from "../components/sections/HeroSection";
 import SelectedWorkSection from "../components/sections/SelectedWorkSection";
 import ProductExperiencesSection from "../components/sections/ProductExperiencesSection";
+import LatestBlogsSection from "../components/sections/LatestBlogsSection";
+import { listLatestPublishedBlogPosts } from "../lib/blog/repository";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const latestBlogPosts = await listLatestPublishedBlogPosts();
+
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main
+      data-scroll-snap="home"
+      className="min-h-screen bg-background text-foreground"
+    >
       <Navbar />
       <HeroSection />
       <SelectedWorkSection />
       <ProductExperiencesSection />
+      <LatestBlogsSection posts={latestBlogPosts} />
 
       <section
         id="contact"
         className="
+          snap-center
           border-t border-foreground/10
           bg-foreground px-4 py-20
           text-background
